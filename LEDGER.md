@@ -91,3 +91,27 @@
 - **S1 detection:** FAIL for ion2020 (3D 0.69 vs 2D 0.97); PASS for ionproj.
 - **S2:** PASS. **S3 certificate falsification:** PASS (not falsified).
 - **Write-up:** `docs/RESULTS_3D1.md`. The pilot overestimated the route-diversity benefit; the confirmatory run is the result.
+
+## P3D-E8: Why detection was slower on 3D ion2020, exploratory (18 Oct 2026)
+- **Inputs:** the PSC runs.csv files were downloaded and match the analysis hashes (`sim/evidence/3d1_runs/`).
+- **Same number of tests:** 677 tests per network on 3D vs 673 on 2D 11×11, so test count is not the cause.
+- **Instrumented re-run** (`sim/explore/explore_detection.py`; it logs every model-check update without changing any random draw; 8 networks per lattice, cloud):
+  - The null bound q is the same (0.048 vs 0.047).
+  - The evidence per test (E − q) is smaller on 3D (0.023 vs 0.032), but within noise: SD across networks 0.014–0.016, so the standard error of the difference is about 0.007.
+  - Alarms: 4/8 on 3D vs 8/8 on 2D.
+- **PSC data point the other way:** the true kept fidelity under the offset is slightly *lower* on 3D (0.894 vs 0.896), with more bad pairs (61% vs 56%). That alone would make detection easier, not harder.
+- **Conclusion:** mechanism not resolved; the 31/32 vs 22/32 gap is unlikely to be chance (Fisher p ≈ 0.006). Resolving it needs a targeted study: more networks and the per-test logs.
+- **Reproducibility finding:** cloud re-runs of the P3D tasks are not bit-identical to PSC. For example, network 0 on 11×11 gave 7,478 delivered pairs in the cloud vs 7,170 on PSC, and the hook was checked to change nothing. PSC's MKL and the cloud's OpenBLAS diverge on these larger lattices, although they agreed on 5×5. Reproducing Study 3D-1 exactly therefore needs PSC's anaconda Python.
+
+## P3D-E9: Reach baseline, exploratory analytic (18 Oct 2026)
+- **Method:** `analytics/reach_baseline.py`. The paper's physics model with homogeneous links, uniform demand, and the guard approximated by a confidence bound at level α/U_max.
+- **ion2020:** reach is 1 hop.
+- **ionproj:** reach is 3 hops (2 with the guard).
+- **ionfut** (F0 0.99, R 1,000/s): reach is 6 hops (5 with the guard). Served share of uniform demand with the guard:
+
+  | 2D 32×32 | 3D 10³ | 2D 37×37 (matched links) |
+  |---|---|---|
+  | 5.2% | **14.6%** | 4.0% |
+
+  That is about 2.8× the 2D share at matched nodes and 3.6× at matched links. U_max is 33 vs 17, but it costs the same one hop on both lattices.
+- **Next:** design note `docs/DESIGN_3D2_REACH.md`. It lists the fork v2 work (lazy users, DP routing, closed-form U_max) and open decisions. It is not pre-registered.

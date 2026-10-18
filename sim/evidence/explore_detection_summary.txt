@@ -1,0 +1,41 @@
+EXPLORATORY (not pre-registered): S1 detection gap, ion2020, kgMChN offset 0.044 p=0.1. 8 networks per lattice, Study 3D-1 seeds,
+re-run in the cloud (Linux/OpenBLAS). Not bit-identical to the PSC runs (MKL): larger lattices diverge across BLAS builds.
+lat            d2g11       d3g5
+alarmed       1.0000     0.5000
+n_tests     732.7500   750.3750
+n_pre       716.6250   745.2500
+E_pre         0.0781     0.0705
+q_pre         0.0456     0.0474
+gap_pre       0.0324     0.0231
+E_all         0.0783     0.0706
+q_all         0.0467     0.0476
+delivered  6948.0000  7338.7500
+
+whole-run evidence per test (E - q), per network:
+lat   d2g11    d3g5
+idx                
+0    0.0266  0.0177
+1    0.0288  0.0285
+2    0.0592  0.0238
+3    0.0195  0.0213
+4    0.0219  0.0327
+5    0.0266 -0.0006
+6    0.0250  0.0088
+7    0.0452  0.0517
+
+whole-run mean q (null bound, i.e. how pessimistic the guard's own prediction is) and mean E (observed test error rate):
+        q_all           E_all         gap_all        
+         mean     std    mean     std    mean     std
+lat                                                  
+d2g11  0.0467  0.0028  0.0783  0.0160  0.0316  0.0136
+d3g5   0.0476  0.0016  0.0706  0.0162  0.0230  0.0158
+
+PSC confirmatory runs, same cell (32 networks per lattice): true kept-pair fidelity and bad-pair share
+lat            d2g11      d2g13       d3g5
+alarmed       0.9688     0.8750     0.6875
+p10_F         0.8957     0.8960     0.8938
+bad_rate      0.5616     0.5431     0.6098
+delivered  6823.5625  7107.9375  6729.0625
+p10_tests   672.6875   713.4375   676.8750
+h1_deliv   5283.2500  5520.1562  5154.5000
+h2_deliv   1540.3125  1587.7812  1574.5625

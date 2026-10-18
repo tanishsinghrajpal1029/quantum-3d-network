@@ -1,0 +1,28 @@
+P3D-E8 (EXPLORATORY, analytic + small Monte Carlo; no network simulation): the REACH question.
+With requests between uniformly random node pairs (any hop distance), how many can be served above tau on 2D vs 3D lattices,
+and how much of that survives the per-user guard, whose per-link level alpha/U_max shrinks as U_max (links a user can be routed
+over) grows with path length, faster in 3D?
+
+Physics: the paper's Pauli-transfer model (upstream ptm_model.delivered_F): two chains of h Werner links, exponential heralding
+waits at rate (1-rho)R per link, memory dephasing T2, gate error e, one DEJMPS round. Homogeneous links at the fleet mean
+lambda = (4F0-1)/3 - AMP/2 (AMP = 0.02, as the simulator's mean shift). Chain-timing averaged over 400 draws.
+Guard (approximate): per-link lower bound lambda_lo = lambda - w, w = (2/r) sqrt(p(1-p)) sqrt((4/n) ln(sqrt2 / a)) (normal-mixture
+confidence sequence with its free parameter matched to n), a = alpha / U_max, alpha = 0.05, n = calibration pairs per link after
+E epochs (rho R T per epoch). The guard serves hop h if the mean predicted fidelity from lambda_lo is >= tau. This ignores link
+spread, drift and the risk controller, so it is an optimistic, upper-bound-style guide, not a result.
+
+== ion2020: link F0 0.94, R 182.0/s; true fidelity by hop: 1:0.944, 2:0.886, 3:0.825, 4:0.764, 5:0.702, 6:0.643, 7:0.589, 8:0.539, 9:0.496, 10:0.457, 11:0.425, 12:0.398
+   longest hop with true F >= 0.9: 1
+   2D 32x32 (1,024 nodes)                 mean hop  21.3 | servable share (true model)   0.4% | with guard: max hop  1, U_max     1, share   0.4%
+   3D 10^3 (1,000 nodes)                  mean hop   9.9 | servable share (true model)   0.5% | with guard: max hop  1, U_max     1, share   0.5%
+   2D 37x37 (2,664 links, ~ 3D's 2,700)   mean hop  24.7 | servable share (true model)   0.3% | with guard: max hop  1, U_max     1, share   0.3%
+== ionproj: link F0 0.97, R 200.0/s; true fidelity by hop: 1:0.969, 2:0.938, 3:0.904, 4:0.868, 5:0.830, 6:0.792, 7:0.752, 8:0.711, 9:0.673, 10:0.635, 11:0.598, 12:0.566
+   longest hop with true F >= 0.9: 3
+   2D 32x32 (1,024 nodes)                 mean hop  21.3 | servable share (true model)   2.2% | with guard: max hop  2, U_max     4, share   1.1%
+   3D 10^3 (1,000 nodes)                  mean hop   9.9 | servable share (true model)   4.7% | with guard: max hop  2, U_max     4, share   2.0%
+   2D 37x37 (2,664 links, ~ 3D's 2,700)   mean hop  24.7 | servable share (true model)   1.6% | with guard: max hop  2, U_max     4, share   0.8%
+== ionfut: link F0 0.99, R 1000.0/s; true fidelity by hop: 1:0.984, 2:0.968, 3:0.953, 4:0.937, 5:0.920, 6:0.904, 7:0.887, 8:0.869, 9:0.852, 10:0.834, 11:0.816, 12:0.798
+   longest hop with true F >= 0.9: 6
+   2D 32x32 (1,024 nodes)                 mean hop  21.3 | servable share (true model)   7.1% | with guard: max hop  5, U_max    17, share   5.2%
+   3D 10^3 (1,000 nodes)                  mean hop   9.9 | servable share (true model)  21.7% | with guard: max hop  5, U_max    33, share  14.6%
+   2D 37x37 (2,664 links, ~ 3D's 2,700)   mean hop  24.7 | servable share (true model)   5.4% | with guard: max hop  5, U_max    17, share   4.0%

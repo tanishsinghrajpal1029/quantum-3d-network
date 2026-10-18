@@ -28,4 +28,5 @@ At a matched number of nodes, does a 3D cubic lattice deliver more usable entang
 
 ## Status
 - **D1 (exploratory analytics):** done. See `analytics/lattice_baseline_output.txt` and `LEDGER.md` P3D-E1.
-- **Next:** fork the simulator, generalise the topology to d dimensions, and check that the 2D case reproduces Study 34 exactly before running any 3D case.
+- **D2 (simulator fork):** done. At d = 2 it reproduces Study 34 bit for bit (4/4 runs, 83 columns). A 3D smoke test runs. See `sim/README.md` and `LEDGER.md` P3D-E2 and P3D-E3.
+- **Next:** decide the design (hardware types, matched-links arm, lattice sizes), run a small 3D pilot (11×11 vs 5³), then pre-register before any PSC run.

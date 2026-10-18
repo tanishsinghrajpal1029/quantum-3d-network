@@ -1,0 +1,10 @@
+d=3 n=3: 27 nodes, 54 links; 44 pilot tasks
+['ion2020', 'field', 'kg', '-|p00|base', 0] 86s users=306 served=256 delivered=16104 bad=0 qual=16104 alarms=0 users_bad_served=0
+['ion2020', 'field', 'kg', '-|p00|base', 1] 78s users=306 served=251 delivered=18405 bad=0 qual=18405 alarms=0 users_bad_served=0
+['ion2020', 'field', 'kgMChN', '-|p10|base', 0] 86s users=306 served=256 delivered=16104 bad=0 qual=16104 alarms=0 users_bad_served=0
+d=3 n=3: 27 nodes, 54 links; 44 pilot tasks
+['ion2020', 'field', 'kg', 'o0.044|p00|base', 0] 102s users=306 served=256 delivered=16104 bad=8198 qual=7906 alarms=0 users_bad_served=169
+['ion2020', 'field', 'kgMChN', '-|p20|base', 0] 85s users=306 served=256 delivered=16104 bad=0 qual=16104 alarms=0 users_bad_served=0
+d=3 n=3: 27 nodes, 54 links; 44 pilot tasks
+['ion2020', 'field', 'kgMChN', 'o0.044|p10|base', 0] 114s users=306 served=253 delivered=12555 bad=6328 qual=6227 alarms=1 users_bad_served=166
+['ion2020', 'field', 'kgMCa', 'o0.044|p10|base', 0] 142s users=306 served=54 delivered=2418 bad=0 qual=2418 alarms=0 users_bad_served=0

@@ -1,0 +1,36 @@
+# Verbatim copies from Files11-EndToEnd-PRX-Claude/prx_work (paper code, release v0.8.0). DO NOT EDIT.
+# sha256[:16]  origin
+02a9220f4f1e35dc 24_ai_v2_hardware/ai_model24.py
+6b84bbdd3c10fd36 27_certification/cert.py
+9091e3364b19fe56 30_closed_loop/core30.py
+3f6df6215f05861c 24_ai_v2_hardware/corr_net.py
+97104d05b747ca4a 24_ai_v2_hardware/corr_net24.py
+cc954805fc279f39 18c_drift_frontier/drift_queue_des.py
+070acce42d9a841d 18c_drift_frontier/drift_queue_des_c1.py
+4cc0016adedf331d 18c_drift_frontier/drift_queue_des_g1.py
+b3f90eaa06042f35 18c_drift_frontier/drift_queue_des_g2.py
+cc2e53c2609904f2 18c_drift_frontier/drift_queue_des_v11.py
+8ea82ead5da0b6d9 18c_drift_frontier/drift_queue_des_v15.py
+bf7882e7948b5749 18c_drift_frontier/drift_queue_des_v16.py
+604f743db935a327 18c_drift_frontier/drift_queue_des_v17.py
+0d53da93eb90bf2f 18c_drift_frontier/drift_queue_des_v18.py
+541b21bf9ef8fdab 18c_drift_frontier/drift_queue_des_v19.py
+d32425558dcc19e6 18c_drift_frontier/drift_queue_des_v20.py
+3cbf3be8649677da 18c_drift_frontier/drift_queue_des_v21.py
+49e10e8adf5d86ac 18c_drift_frontier/drift_queue_des_v5.py
+3dac7de579d88e3f 18c_drift_frontier/drift_queue_des_v6.py
+07d639c770e8503f 18c_drift_frontier/drift_queue_des_v7.py
+788ec1aa79d61da2 18c_drift_frontier/drift_queue_des_v9.py
+27d2df220d6c4285 24_ai_v2_hardware/hw24.py
+a05f0822c0335f3f 30_closed_loop/mcheck.py
+fc044e141f7c90ca 18c_drift_frontier/memory_t1t2_exact.py
+47d89f1555c07513 27_certification/ptm_corr.py
+bf59d252191eefbd 18c_drift_frontier/ptm_model.py
+10f75e0ec5711e85 24_ai_v2_hardware/study23.py
+7be8c2925e66b10b 24_ai_v2_hardware/study24.py
+ecccd63cb64ab392 25_realism/study25.py
+56436cc89a20325b 26_certified/study26.py
+e796ebb7c05a28cf 30_closed_loop/study30.py
+3d1462ed528bb311 32_robustness/study32.py
+05acdad26f113f5d 34_grids/study34.py
+4818399d4f9e56f1 34_grids/tasks_s34_g5.jsonl

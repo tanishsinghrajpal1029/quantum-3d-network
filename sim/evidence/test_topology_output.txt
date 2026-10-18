@@ -1,0 +1,7 @@
+d=2 n=5: nodes, link ids and candidate paths identical (Lmax 2, 3)
+d=2 n=10: nodes, link ids and candidate paths identical (Lmax 2, 3)
+d=2 n=30: nodes, link ids and candidate paths identical (Lmax 2, 3)
+d=3 n=3: 27 nodes, 54 links; path counts = multinomial
+d=3 n=5: 125 nodes, 300 links; path counts = multinomial
+d=3 n=10: 1000 nodes, 2700 links; path counts = multinomial
+ALL TOPOLOGY TESTS PASS

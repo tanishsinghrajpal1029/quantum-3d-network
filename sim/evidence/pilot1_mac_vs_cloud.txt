@@ -1,0 +1,31 @@
+Same 6 pilot tasks (2D 11x11, ion2020), same code and seeds: cloud container (Linux x86_64) vs Tanish's Mac (macOS, labs env)
+
+8d4e67b7e71d: 20 of 103 columns differ
+      arm         cfg idx requests delivered bad guard_blocks users_served users_bad_served     p10_F first_alarm_ep
+cloud  kg  -|p00|base   1    25699     13236   0          892          746                0  0.936972            NaN
+mac    kg  -|p00|base   1    25793     13420   0          842          750                0  0.936849            NaN
+
+09574cd66eb8: 33 of 103 columns differ
+      arm              cfg idx requests delivered   bad guard_blocks users_served users_bad_served     p10_F first_alarm_ep
+cloud  kg  o0.044|p00|base   1    25699     13236  7080          892          746              491  0.892972            NaN
+mac    kg  o0.044|p00|base   1    25793     13420  7268          842          750              497  0.892849            NaN
+
+b795ec83b2ac: 53 of 103 columns differ
+          arm              cfg idx requests delivered   bad guard_blocks users_served users_bad_served     p10_F first_alarm_ep
+cloud  kgMChN  o0.044|p10|base   1    25699     13236  7080          892          746              491  0.892972            NaN
+mac    kgMChN  o0.044|p10|base   1    25800      9425  4945        16965          735              473  0.893842      62.427457
+
+a047d48a695a: 18 of 103 columns differ
+      arm         cfg idx requests delivered bad guard_blocks users_served users_bad_served     p10_F first_alarm_ep
+cloud  kg  -|p00|base   0    26321     12033   0          641          619                0  0.937045            NaN
+mac    kg  -|p00|base   0    26257     12001   0          640          619                0  0.937039            NaN
+
+8fda6c92a12a: 26 of 103 columns differ
+      arm              cfg idx requests delivered   bad guard_blocks users_served users_bad_served     p10_F first_alarm_ep
+cloud  kg  o0.044|p00|base   0    26321     12033  7575          641          619              441  0.893045            NaN
+mac    kg  o0.044|p00|base   0    26257     12001  7549          640          619              441  0.893039            NaN
+
+454192cf6a22: 8 of 103 columns differ
+          arm              cfg idx requests delivered   bad guard_blocks users_served users_bad_served    p10_F first_alarm_ep
+cloud  kgMChN  o0.044|p10|base   0    26374      7207  4470        20644          609              429  0.89364      54.759081
+mac    kgMChN  o0.044|p10|base   0    26374      7207  4470        20643          609              429  0.89364      54.759081

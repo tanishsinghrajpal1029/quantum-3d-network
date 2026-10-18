@@ -1,0 +1,267 @@
+Pilot 1 summary: 72 runs (d2g11: 24, d2g13: 24, d3g5: 24); means over networks
+EXPLORATORY: dev seeds, 2 networks per cell. Not evidence for any hypothesis.
+
+== ion2020 | kg -|p00
+lat              2D 11x11 (nodes)  2D 13x13 (links)    3D 5^3
+users_all                1236.000          1772.000  2010.000
+umax                        4.000             4.000     4.000
+serve_share                 0.554             0.472     0.580
+h1_serve                    1.000             1.000     1.000
+h2_serve                    0.307             0.184     0.401
+h3_serve                      NaN               NaN       NaN
+h2_paths_mean               1.503             1.502     1.681
+h3_paths_mean                 NaN               NaN       NaN
+oracle_share                0.582             0.506     0.649
+deliv_share                 0.489             0.418     0.478
+block_rate                  0.029             0.032     0.036
+p10_F                       0.937             0.937     0.934
+bad_rate                    0.000             0.000     0.000
+harmed_served               0.000             0.000     0.000
+alarms                      0.000             0.000     0.000
+first_alarm_ep                NaN               NaN       NaN
+bad_after_alarm             0.000             0.000     0.000
+users_bad_post              0.000             0.000     0.000
+elapsed_s                  88.250            96.800    89.700
+
+== ion2020 | kgMChN o0.044|p10
+lat              2D 11x11 (nodes)  2D 13x13 (links)    3D 5^3
+users_all                1236.000          1772.000  2010.000
+umax                        4.000             4.000     4.000
+serve_share                 0.544             0.425     0.580
+h1_serve                    1.000             0.982     1.000
+h2_serve                    0.291             0.123     0.401
+h3_serve                      NaN               NaN       NaN
+h2_paths_mean               1.503             1.502     1.681
+h3_paths_mean                 NaN               NaN       NaN
+oracle_share                0.214             0.167     0.200
+deliv_share                 0.319             0.126     0.478
+block_rate                  0.720             1.207     0.036
+p10_F                       0.894             0.896     0.890
+bad_rate                    0.572             0.541     0.593
+harmed_served               0.674             0.641     0.691
+alarms                      1.000             1.000     0.000
+first_alarm_ep             58.593            26.375       NaN
+bad_after_alarm             0.000             0.000     0.000
+users_bad_post              0.000             0.000     0.000
+elapsed_s                 108.300           120.850   103.850
+
+== ion2020 | kgMCa o0.044|p10
+lat              2D 11x11 (nodes)  2D 13x13 (links)    3D 5^3
+users_all                1236.000          1772.000  2010.000
+umax                        4.000             4.000     4.000
+serve_share                 0.055             0.033     0.047
+h1_serve                    0.155             0.095     0.158
+h2_serve                    0.000             0.000     0.000
+h3_serve                      NaN               NaN       NaN
+h2_paths_mean               1.503             1.502     1.681
+h3_paths_mean                 NaN               NaN       NaN
+oracle_share                0.214             0.166     0.197
+deliv_share                 0.031             0.014     0.019
+block_rate                  1.847             1.643     1.824
+p10_F                       0.917             0.917     0.917
+bad_rate                    0.000             0.000     0.000
+harmed_served               0.000             0.000     0.000
+alarms                      0.000             0.000     0.000
+first_alarm_ep                NaN               NaN       NaN
+bad_after_alarm             0.000             0.000     0.000
+users_bad_post              0.000             0.000     0.000
+elapsed_s                 133.200           132.550   141.200
+
+== ion2020 | kg o0.044|p00
+lat              2D 11x11 (nodes)  2D 13x13 (links)    3D 5^3
+users_all                1236.000          1772.000  2010.000
+umax                        4.000             4.000     4.000
+serve_share                 0.554             0.472     0.580
+h1_serve                    1.000             1.000     1.000
+h2_serve                    0.307             0.184     0.401
+h3_serve                      NaN               NaN       NaN
+h2_paths_mean               1.503             1.502     1.681
+h3_paths_mean                 NaN               NaN       NaN
+oracle_share                0.212             0.165     0.200
+deliv_share                 0.489             0.418     0.478
+block_rate                  0.029             0.032     0.036
+p10_F                       0.893             0.893     0.890
+bad_rate                    0.585             0.618     0.593
+harmed_served               0.688             0.689     0.691
+alarms                      0.000             0.000     0.000
+first_alarm_ep                NaN               NaN       NaN
+bad_after_alarm             0.000             0.000     0.000
+users_bad_post              0.000             0.000     0.000
+elapsed_s                  97.650           104.600   102.550
+
+== ion2020 | kgMCa -|p10
+lat              2D 11x11 (nodes)  2D 13x13 (links)    3D 5^3
+users_all                1236.000          1772.000  2010.000
+umax                        4.000             4.000     4.000
+serve_share                 0.411             0.356     0.333
+h1_serve                    1.000             0.991     0.992
+h2_serve                    0.086             0.010     0.053
+h3_serve                      NaN               NaN       NaN
+h2_paths_mean               1.503             1.502     1.681
+h3_paths_mean                 NaN               NaN       NaN
+oracle_share                0.586             0.513     0.654
+deliv_share                 0.374             0.343     0.303
+block_rate                  0.411             0.281     0.615
+p10_F                       0.944             0.943     0.946
+bad_rate                    0.000             0.000     0.000
+harmed_served               0.000             0.000     0.000
+alarms                      0.000             0.000     0.000
+first_alarm_ep                NaN               NaN       NaN
+bad_after_alarm             0.000             0.000     0.000
+users_bad_post              0.000             0.000     0.000
+elapsed_s                 103.850           107.200   111.700
+
+== ion2020 | kgMChN o0.044F|p10
+lat              2D 11x11 (nodes)  2D 13x13 (links)    3D 5^3
+users_all                1236.000          1772.000  2010.000
+umax                        4.000             4.000     4.000
+serve_share                 0.048             0.039     0.046
+h1_serve                    0.134             0.111     0.155
+h2_serve                    0.000             0.000     0.000
+h3_serve                      NaN               NaN       NaN
+h2_paths_mean               1.503             1.502     1.681
+h3_paths_mean                 NaN               NaN       NaN
+oracle_share                0.212             0.169     0.198
+deliv_share                 0.026             0.018     0.019
+block_rate                  1.877             1.642     1.816
+p10_F                       0.918             0.915     0.917
+bad_rate                    0.000             0.000     0.000
+harmed_served               0.000             0.000     0.000
+alarms                      0.000             0.000     0.000
+first_alarm_ep              0.818             0.699     0.972
+bad_after_alarm             0.000             0.000     0.000
+users_bad_post              0.000             0.000     0.000
+elapsed_s                 132.450           132.050   140.300
+
+== ionproj | kg -|p00
+lat              2D 11x11 (nodes)  2D 13x13 (links)    3D 5^3
+users_all                2308.000          3348.000  4262.000
+umax                        7.000             7.000    12.000
+serve_share                 0.906             0.859     0.944
+h1_serve                    1.000             1.000     0.998
+h2_serve                    1.000             1.000     0.999
+h3_serve                    0.798             0.700     0.895
+h2_paths_mean               1.503             1.502     1.681
+h3_paths_mean               2.343             2.340     3.416
+oracle_share                0.933             0.894     0.964
+deliv_share                 0.858             0.808     0.916
+block_rate                  0.086             0.094     0.085
+p10_F                       0.938             0.938     0.935
+bad_rate                    0.000             0.000     0.000
+harmed_served               0.000             0.000     0.000
+alarms                      0.000             0.000     0.000
+first_alarm_ep                NaN               NaN       NaN
+bad_after_alarm             0.000             0.000     0.000
+users_bad_post              0.000             0.000     0.000
+elapsed_s                  81.550            89.500    75.550
+
+== ionproj | kgMChN o0.044|p10
+lat              2D 11x11 (nodes)  2D 13x13 (links)    3D 5^3
+users_all                2308.000          3348.000  4262.000
+umax                        7.000             7.000    12.000
+serve_share                 0.623             0.776     0.547
+h1_serve                    1.000             1.000     0.990
+h2_serve                    0.696             0.921     0.562
+h3_serve                    0.413             0.583     0.419
+h2_paths_mean               1.503             1.502     1.681
+h3_paths_mean               2.343             2.340     3.416
+oracle_share                0.342             0.307     0.318
+deliv_share                 0.291             0.524     0.229
+block_rate                  2.280             1.202     2.778
+p10_F                       0.915             0.900     0.910
+bad_rate                    0.216             0.508     0.323
+harmed_served               0.506             0.658     0.573
+alarms                      1.000             1.000     1.000
+first_alarm_ep             15.295            53.117    14.606
+bad_after_alarm             0.000             0.000     0.000
+users_bad_post              0.000             0.000     0.000
+elapsed_s                 191.300           157.700   209.150
+
+== ionproj | kgMCa o0.044|p10
+lat              2D 11x11 (nodes)  2D 13x13 (links)    3D 5^3
+users_all                2308.000          3348.000  4262.000
+umax                        7.000             7.000    12.000
+serve_share                 0.230             0.198     0.162
+h1_serve                    1.000             0.995     0.988
+h2_serve                    0.115             0.035     0.068
+h3_serve                    0.000             0.000     0.000
+h2_paths_mean               1.503             1.502     1.681
+h3_paths_mean               2.343             2.340     3.416
+oracle_share                0.340             0.309     0.320
+deliv_share                 0.196             0.173     0.128
+block_rate                  2.666             2.574     3.187
+p10_F                       0.925             0.925     0.926
+bad_rate                    0.000             0.000     0.000
+harmed_served               0.000             0.000     0.000
+alarms                      0.000             0.000     0.000
+first_alarm_ep                NaN               NaN       NaN
+bad_after_alarm             0.000             0.000     0.000
+users_bad_post              0.000             0.000     0.000
+elapsed_s                 156.650           152.900   158.550
+
+== ionproj | kg o0.044|p00
+lat              2D 11x11 (nodes)  2D 13x13 (links)    3D 5^3
+users_all                2308.000          3348.000  4262.000
+umax                        7.000             7.000    12.000
+serve_share                 0.906             0.859     0.944
+h1_serve                    1.000             1.000     0.998
+h2_serve                    1.000             1.000     0.999
+h3_serve                    0.798             0.700     0.895
+h2_paths_mean               1.503             1.502     1.681
+h3_paths_mean               2.343             2.340     3.416
+oracle_share                0.341             0.308     0.319
+deliv_share                 0.858             0.808     0.916
+block_rate                  0.086             0.094     0.085
+p10_F                       0.894             0.894     0.891
+bad_rate                    0.627             0.642     0.675
+harmed_served               0.691             0.698     0.719
+alarms                      0.000             0.000     0.000
+first_alarm_ep                NaN               NaN       NaN
+bad_after_alarm             0.000             0.000     0.000
+users_bad_post              0.000             0.000     0.000
+elapsed_s                 110.500           116.000   109.050
+
+== ionproj | kgMCa -|p10
+lat              2D 11x11 (nodes)  2D 13x13 (links)    3D 5^3
+users_all                2308.000          3348.000  4262.000
+umax                        7.000             7.000    12.000
+serve_share                 0.734             0.698     0.738
+h1_serve                    1.000             0.999     0.998
+h2_serve                    0.999             0.998     0.995
+h3_serve                    0.428             0.359     0.508
+h2_paths_mean               1.503             1.502     1.681
+h3_paths_mean               2.343             2.340     3.416
+oracle_share                0.932             0.895     0.965
+deliv_share                 0.642             0.598     0.629
+block_rate                  0.836             0.830     1.179
+p10_F                       0.947             0.946     0.945
+bad_rate                    0.000             0.000     0.000
+harmed_served               0.000             0.000     0.000
+alarms                      0.000             0.000     0.000
+first_alarm_ep                NaN               NaN       NaN
+bad_after_alarm             0.000             0.000     0.000
+users_bad_post              0.000             0.000     0.000
+elapsed_s                 104.300           114.400   107.300
+
+== ionproj | kgMChN o0.044F|p10
+lat              2D 11x11 (nodes)  2D 13x13 (links)    3D 5^3
+users_all                2308.000          3348.000  4262.000
+umax                        7.000             7.000    12.000
+serve_share                 0.229             0.196     0.159
+h1_serve                    1.000             0.995     0.984
+h2_serve                    0.112             0.032     0.063
+h3_serve                    0.000             0.000     0.000
+h2_paths_mean               1.503             1.502     1.681
+h3_paths_mean               2.343             2.340     3.416
+oracle_share                0.344             0.307     0.318
+deliv_share                 0.199             0.169     0.127
+block_rate                  2.654             2.587     3.189
+p10_F                       0.925             0.925     0.926
+bad_rate                    0.000             0.000     0.000
+harmed_served               0.000             0.000     0.000
+alarms                      0.000             0.000     0.000
+first_alarm_ep              0.389             0.560     0.642
+bad_after_alarm             0.000             0.000     0.000
+users_bad_post              0.000             0.000     0.000
+elapsed_s                 207.650           206.750   230.100
+

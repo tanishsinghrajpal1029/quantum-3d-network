@@ -1,0 +1,56 @@
+EXPLORATORY (2 networks per cell)
+== ion2020 | kg -|p00|base
+lat         2D 11x11  2D 13x13  3D 5^3
+succ_h1        0.992     0.988   0.995
+succ_h2        0.210     0.108   0.257
+badfrac_h2     0.000     0.000   0.000
+
+== ion2020 | kgMCa -|p10|base
+lat         2D 11x11  2D 13x13  3D 5^3
+succ_h1        0.965     0.963   0.965
+succ_h2        0.048     0.006   0.022
+badfrac_h2     0.000     0.000   0.000
+
+== ion2020 | kg o0.044|p00|base
+lat         2D 11x11  2D 13x13  3D 5^3
+succ_h1        0.992     0.988   0.995
+succ_h2        0.210     0.108   0.257
+badfrac_h2     1.000     1.000   1.000
+
+== ion2020 | kgMCa o0.044|p10|base
+lat         2D 11x11  2D 13x13  3D 5^3
+succ_h1        0.086      0.04   0.064
+succ_h2        0.000      0.00   0.000
+badfrac_h2     0.000      0.00   0.000
+
+== ionproj | kg -|p00|base
+lat         2D 11x11  2D 13x13  3D 5^3
+succ_h1        1.004     1.007   0.982
+succ_h2        0.992     0.992   1.009
+succ_h3        0.699     0.594   0.841
+badfrac_h2     0.000     0.000   0.000
+badfrac_h3     0.000     0.000   0.000
+
+== ionproj | kgMCa -|p10|base
+lat         2D 11x11  2D 13x13  3D 5^3
+succ_h1        0.994     1.003   0.996
+succ_h2        0.960     0.923   0.959
+succ_h3        0.262     0.201   0.325
+badfrac_h2     0.000     0.000   0.000
+badfrac_h3     0.000     0.000   0.000
+
+== ionproj | kg o0.044|p00|base
+lat         2D 11x11  2D 13x13  3D 5^3
+succ_h1        1.004     1.007   0.982
+succ_h2        0.992     0.992   1.009
+succ_h3        0.699     0.594   0.841
+badfrac_h2     0.631     0.700   0.524
+badfrac_h3     0.992     1.000   0.999
+
+== ionproj | kgMCa o0.044|p10|base
+lat         2D 11x11  2D 13x13  3D 5^3
+succ_h1        0.922     0.894   0.840
+succ_h2        0.060     0.017   0.029
+succ_h3        0.000     0.000   0.000
+badfrac_h2     0.000     0.000   0.000
+badfrac_h3     0.000     0.000   0.000

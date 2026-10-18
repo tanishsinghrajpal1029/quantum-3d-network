@@ -39,3 +39,19 @@
   - The hybrid check (p = 0.1) alarmed at epoch 70 with 0 bad pairs after the alarm. 166 users were harmed *before* the alarm, as in 2D.
   - The always-on margin gave 0 bad pairs but served only 54/306 users.
 - **Not evidence for any hypothesis:** one network per cell, and a lattice too small to compare.
+
+## P3D-E4: Pilot 1, 2D vs 3D closed loop (18 Oct 2026). EXPLORATORY, dev seeds, 2 networks per cell
+- **Runs:** 72/72 on the Mac (macOS, labs env). Lattices: 2D 11×11, 2D 13×13 and 3D 5³; ion2020 and ionproj; 6 configurations. Data: `sim/evidence/pilot1_runs.csv` (sha 207286137ead3eaa).
+- **Longest-hop success per request (no check, no offset):**
+
+  | Hardware, hop | 2D 11×11 | 2D 13×13 | 3D 5³ |
+  |---|---|---|---|
+  | ion2020, 2 hops | 0.21 | 0.11 | 0.26 |
+  | ionproj, 3 hops | 0.70 | 0.59 | 0.84 |
+
+- **Fidelity:** delivered fidelity is unchanged (0.937 vs 0.934).
+- **Safety:** 0 bad pairs after an alarm and under the always-on margin, on all lattices.
+- **To watch:** the 3D hybrid check did not alarm in 0/2 ion2020 offset networks (2D: 2/2).
+- **Platform:** Mac and cloud runs of the same tasks diverge slightly (floating point), so confirmatory runs need one platform.
+- **Data note:** the CSV column-set issue was repaired exactly by `load_runs.py`, and the writer is fixed.
+- **Not evidence for any hypothesis.**

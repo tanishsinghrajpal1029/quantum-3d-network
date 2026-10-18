@@ -47,3 +47,25 @@ This first sign points to more choice of routes, not better pairs: 3D serves mor
 cd sim && tools/run_pilot1.sh        # about 2 h on 2 cores; output in sim/out/pilot1/
 python3 tools/summarise_pilot1.py    # writes sim/evidence/pilot1_summary.txt
 ```
+
+## Results (18 Oct 2026; 72/72 runs on Tanish's Mac, 15 workers, 11.5 min). EXPLORATORY.
+Full tables: `sim/evidence/pilot1_summary.txt` and `sim/evidence/pilot1_perhop.txt`.
+- **Fair per-request measure.** The total request rate is fixed, but the user count differs (ion2020: 1,236 / 1,772 / 2,010 users), so per-user shares are diluted differently on each lattice. We therefore use **success per request at each hop distance**: deliveries at hop h divided by the expected requests at hop h.
+- **Longest-hop success, no check, no offset (`kg`):**
+
+  | Hardware, hop | 2D 11×11 | 2D 13×13 | 3D 5³ |
+  |---|---|---|---|
+  | ion2020, 2 hops | 0.21 | 0.11 | 0.26 |
+  | ionproj, 3 hops | 0.70 | 0.59 | 0.84 |
+
+  Shorter requests succeed almost always on every lattice.
+- **Route choice:** mean shortest paths per pair are 1.50 → 1.68 at 2 hops and 2.34 → 3.42 at 3 hops. U_max (ionproj) is 7 → 12.
+- **Delivered fidelity is unchanged:** mean kept fidelity is 0.937 / 0.937 / 0.934 (ion2020, `kg`). 3D serves more requests, not better pairs.
+- **Always-on margin, no offset:**
+  - ionproj 3-hop success: 0.26 / 0.20 / 0.33.
+  - ion2020 2-hop success: 0.048 / 0.006 / 0.022, so the margin cost is mixed.
+- **Safety:** 0 bad pairs after an alarm, and 0 bad pairs under the always-on margin, on every lattice and hardware.
+- **Detection (one cell):** ion2020 with offset 0.044 and the hybrid check alarmed in 2/2 networks on both 2D lattices and in 0/2 on 3D. We need to watch this; n = 2.
+- **Unexplained:** 2D 13×13 does worse than 11×11 per request. Possible causes are network-to-network variation or larger-grid effects. Check this in the next run.
+- **Platform:** the same 6 tasks run in the cloud (Linux) and on the Mac (macOS) give close but not identical values (`sim/evidence/pilot1_mac_vs_cloud.txt`). Tiny floating-point differences change a route choice and the runs diverge. Bit-for-bit reproduction therefore holds only on one platform: confirmatory runs and their d = 2 check must run on the same machine type.
+- **Bug found and handled:** ion2020 and ionproj rows had different column sets in the appended CSVs. `sim/tools/load_runs.py` re-keys them exactly, and `study3d.py` now always writes the columns h1–h3.

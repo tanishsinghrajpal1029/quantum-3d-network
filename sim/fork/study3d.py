@@ -25,6 +25,7 @@ SEEDS = (19341, 19342, 19343, 19344); DEV = (20341, 20342, 20343, 20344)    # St
 P3D_SEEDS = None                                          # fixed in the pre-registration; pilots use P3D_DEV
 P3D_DEV = (30341, 30342, 30343, 30344)
 HWS = ("ion2020", "ionproj")
+HMAX = 3                                                  # per-hop columns h1..h3 always written
 
 
 def configs(mults=("base",)):
@@ -53,9 +54,9 @@ class Net3D(s32.Net32):
                    users_bad_served=sum(1 for x in s.ustat.values() if x[1] > 0))
         if not s.compat34:                                         # per-hop breakdown (read-only: no random draws)
             hop = [len(cs[0]) for cs in s.cands]
-            for h in range(1, s.Lmax + 1):
+            for h in range(1, HMAX + 1):                           # fixed column set for every hardware (pilot 1 lesson)
                 ids = [i for i, x in enumerate(hop) if x == h]; us = [s.ustat[i] for i in ids if i in s.ustat]
-                out[f"h{h}_users"] = len(ids); out[f"h{h}_paths_mean"] = float(sum(len(s.cands[i]) for i in ids) / max(len(ids), 1))
+                out[f"h{h}_users"] = len(ids); out[f"h{h}_paths_mean"] = float(sum(len(s.cands[i]) for i in ids) / len(ids)) if ids else float("nan")
                 out[f"h{h}_served"] = len(us); out[f"h{h}_users_bad"] = sum(1 for x in us if x[1] > 0)
                 out[f"h{h}_deliv"] = sum(x[0] for x in us); out[f"h{h}_bad"] = sum(x[1] for x in us)
             out["umax"] = s.Umax

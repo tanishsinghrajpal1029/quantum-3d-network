@@ -2,8 +2,10 @@
 import glob, os, sys
 import pandas as pd
 H = os.path.dirname(os.path.abspath(__file__)); D = os.path.join(H, "..", "out", "pilot1")
-fs = sorted(glob.glob(os.path.join(D, "*_w*.csv")))
-df = pd.concat([pd.read_csv(f) for f in fs]).drop_duplicates("run")
+sys.path.insert(0, H); import load_runs
+PAT = sys.argv[1] if len(sys.argv) > 1 else "mac_*_w*.csv"          # one platform only (see P3D-E4)
+fs = sorted(glob.glob(os.path.join(D, PAT)))
+df = pd.concat([load_runs.load(f) for f in fs]).drop_duplicates("run")
 df["lattice"] = df.block.str.replace("Q3D", "")
 LAB = {"d2g11": "2D 11x11 (nodes)", "d2g13": "2D 13x13 (links)", "d3g5": "3D 5^3"}
 df["lat"] = df.lattice.map(LAB)

@@ -70,3 +70,24 @@
   - The PSC runner path was tested in the cloud. This found and fixed a path-order bug in `study3d.py` (the upstream g1 could shadow the fork; the GRID_D assertion caught it).
   - Study 34 reproduction re-checked after the fix: 2/2 MATCH.
 - **Frozen files:** `sim/psc/HASHES_PREREG_3D1.txt` (15 files). Timestamped by the GitHub push.
+- **Frozen:** the pre-registration was pushed to GitHub at commit `fc3660d` (18 Oct 2026, 05:13 UTC), before any confirmatory run. `origin/main` equals `fc3660d`, and all prereg hashes verified on the Mac.
+
+## P3D-E6: PSC gate passed (18 Oct 2026)
+- **Gate result:** job 49402863 (PSC Bridges-2, RM-shared; the paper's anaconda Python) finished COMPLETED in 10 min 20 s. The fork at d = 2 reproduced 4/4 Study 34 runs in all 83 columns: `9686e9db3060`, `683f07a56b42`, `538775e95fe5` and `798df27b89fa`.
+- **Hashes:** the files on PSC were checked against `HASHES_PREREG_3D1.txt` before the run (HASHES OK).
+- **PSC speed:** about 1.55× slower per run than the cloud container (101 / 220 / 318 / 612 s, against 63–73 / 140–150 / 204 / 392 s).
+- **Execution note, decided before any confirmatory output:**
+  - The confirmatory jobs use 8 shards (`--array=0-7`, `S18C_NSHARDS=8`) instead of 4, so each lattice fits the pre-registered 1 h limit at PSC speed.
+  - Tasks, seeds, code and analysis are unchanged. Each run's seeds depend only on its task, so sharding cannot change any result.
+  - The expected cost rises to about 100–130 SU because of idle tails.
+
+## P3D-E7: Study 3D-1 confirmatory results (18 Oct 2026)
+- **Runs:** 1,344/1,344 on PSC. runs.csv sha256: d2g11 583c7c40…, d2g13 885c609d…, d3g5 d1e148be… (in full in `sim/evidence/analysis_3d1.txt`).
+- **H1 safety:** PASS. 0/32 harmed networks in every lattice × hardware × arm, and 0 bad pairs.
+- **H2 benefit:** FAIL (1/4). Longest-hop success, 3D vs 2D 11×11 and 3D vs 2D 13×13:
+  - ion2020: −0.007 and −0.022;
+  - ionproj: +0.072 (not significant) and +0.091 (significant).
+- **H3 fidelity equivalence:** PASS. 3D minus 2D is −0.002 to −0.003.
+- **S1 detection:** FAIL for ion2020 (3D 0.69 vs 2D 0.97); PASS for ionproj.
+- **S2:** PASS. **S3 certificate falsification:** PASS (not falsified).
+- **Write-up:** `docs/RESULTS_3D1.md`. The pilot overestimated the route-diversity benefit; the confirmatory run is the result.

@@ -31,4 +31,9 @@ At a matched number of nodes, does a 3D cubic lattice deliver more usable entang
 - **D2 (simulator fork):** done. At d = 2 it reproduces Study 34 bit for bit (4/4 runs, 83 columns). A 3D smoke test runs. See `sim/README.md` and `LEDGER.md` P3D-E2 and P3D-E3.
 - **D3 (Pilot 1, exploratory):** done. 72 runs on the Mac. See `docs/PILOT_1.md` and `LEDGER.md` P3D-E4.
 - **D4 (pre-registration of Study 3D-1):** written (`docs/PREREG_3D1.md`, LEDGER P3D-E5). It is frozen when pushed.
-- **Next:** push; then on PSC, run the d = 2 gate, then the three confirmatory jobs.
+- **D5 (Study 3D-1, confirmatory):** done (`docs/RESULTS_3D1.md`, LEDGER P3D-E6/E7).
+  - Safety holds in 3D.
+  - Route diversity gives at most a small gain (1/4 comparisons pass).
+  - Fidelity is unchanged.
+  - Detection is slower on 3D ion2020.
+- **Next (open):** exploratory look at the detection gap; decide whether to design a reach study (long-distance demand).

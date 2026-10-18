@@ -55,3 +55,18 @@
 - **Platform:** Mac and cloud runs of the same tasks diverge slightly (floating point), so confirmatory runs need one platform.
 - **Data note:** the CSV column-set issue was repaired exactly by `load_runs.py`, and the writer is fixed.
 - **Not evidence for any hypothesis.**
+
+## P3D-E5: Study 3D-1 pre-registration written (18 Oct 2026). Not yet run
+- **Plan:** `docs/PREREG_3D1.md`. 3 lattices (2D 11×11, 2D 13×13, 3D 5³) × 2 hardware × 7 cells × 32 networks = 1,344 runs on PSC. Confirmatory seeds 19351–19354, never used before.
+- **Hypotheses:**
+  - H1 safety (primary): network-level bound ≤ 0.10 and pair-level bound ≤ 0.01.
+  - H2 benefit (primary): 3D minus each 2D lattice in longest-hop success, 4 comparisons at Bonferroni 98.75%.
+  - H3 fidelity equivalence (±0.01).
+  - S1–S3 predictions, including a certificate falsification test.
+  - D1–D4 descriptive.
+- **Gate:** before any confirmatory job, the fork at d = 2 must reproduce 4 Study 34 runs on PSC (`sim/psc/check_d2.sbatch`).
+- **Checks done before freezing:**
+  - The analysis script was dry-run on pilot data (`sim/evidence/analyze_3d1_dryrun_pilot.txt`).
+  - The PSC runner path was tested in the cloud. This found and fixed a path-order bug in `study3d.py` (the upstream g1 could shadow the fork; the GRID_D assertion caught it).
+  - Study 34 reproduction re-checked after the fix: 2/2 MATCH.
+- **Frozen files:** `sim/psc/HASHES_PREREG_3D1.txt` (15 files). Timestamped by the GitHub push.

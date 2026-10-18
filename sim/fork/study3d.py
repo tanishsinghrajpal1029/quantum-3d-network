@@ -9,9 +9,9 @@ Changes vs study34.py: lattice dimension; link-count assertion d n^(d-1) (n-1); 
 """
 import hashlib, json, os, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
-UP = os.path.join(HERE, "..", "upstream")
-for p in (HERE, UP):
-    if p not in sys.path: sys.path.insert(0 if p == HERE else 1, p)
+UP = os.path.abspath(os.path.join(HERE, "..", "upstream"))
+# fork/ first, upstream/ second, whatever was on the path before (PYTHONPATH, runner dir): the fork's g1 must shadow upstream
+sys.path[:] = [HERE, UP] + [p for p in sys.path if not p or os.path.abspath(p) not in (HERE, UP)]
 import drift_queue_des_g1 as g1
 assert hasattr(g1, "GRID_D"), f"wrong drift_queue_des_g1 on path: {g1.__file__}"
 D = int(os.environ.get("P3D_D", "2")); GRID = int(os.environ.get("P3D_GRID", "5"))
@@ -22,7 +22,7 @@ assert cn1.NL == D * GRID ** (D - 1) * (GRID - 1), (cn1.NL, D, GRID)
 assert len(cn1.NODES) == GRID ** D
 
 SEEDS = (19341, 19342, 19343, 19344); DEV = (20341, 20342, 20343, 20344)    # Study 34 (compat); P3D blocks set their own below
-P3D_SEEDS = None                                          # fixed in the pre-registration; pilots use P3D_DEV
+P3D_SEEDS = (19351, 19352, 19353, 19354)                 # Study 3D-1 confirmatory (docs/PREREG_3D1.md); pilots use P3D_DEV
 P3D_DEV = (30341, 30342, 30343, 30344)
 HWS = ("ion2020", "ionproj")
 HMAX = 3                                                  # per-hop columns h1..h3 always written
@@ -92,13 +92,23 @@ def run_one(t):
     return row
 
 
+# Study 3D-1 confirmatory cells (docs/PREREG_3D1.md): the 6 Pilot 1 cells plus the gated check with no offset (false alarms)
+CFGS_3D1 = [("kg", "-|p00|base"), ("kg", "o0.044|p00|base"), ("kgMChN", "-|p10|base"), ("kgMChN", "o0.044|p10|base"),
+            ("kgMChN", "o0.044F|p10|base"), ("kgMCa", "-|p10|base"), ("kgMCa", "o0.044|p10|base")]
+NNET_3D1 = 32
+
+
+def tasks_3d1(nnet=NNET_3D1):
+    return [[f"P3Dd{D}g{GRID}", hw, "field", arm, cfg, i] for hw in HWS for (arm, cfg) in CFGS_3D1 for i in range(nnet)]
+
+
 def tasks(prefix, nnet, mults=("base",)):
     return [[f"{prefix}d{D}g{GRID}", hw, "field", arm, cfg, i] for (hw, arm, cfg) in configs(mults) for i in range(nnet)]
 
 
 if __name__ == "__main__":
-    if sys.argv[1:2] == ["--write-pilot"]:
-        ts = tasks("Q3D", int(sys.argv[3]) if len(sys.argv) > 3 else 2)
+    if sys.argv[1:2] in (["--write-pilot"], ["--write-3d1"]):
+        ts = tasks("Q3D", int(sys.argv[3]) if len(sys.argv) > 3 else 2) if sys.argv[1] == "--write-pilot" else tasks_3d1()
         with open(sys.argv[2], "w") as f:
             for t in ts: f.write(json.dumps(t) + "\n")
-        print(f"d{D} g{GRID}: wrote {len(ts)} pilot tasks")
+        print(f"d{D} g{GRID}: wrote {len(ts)} tasks to {sys.argv[2]}")

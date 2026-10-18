@@ -1,0 +1,5 @@
+Plumbing test of the PSC path (cloud, 18 Oct 2026): psc_array_runner.py + study3d via PYTHONPATH=fork, 2 pilot-seed tasks on 3D 3^3
+{"module": "study3d", "module_sha": "286a01231bfdbc76e0a80296d28e00f30805f474725a41dff42199d0601ca6ea", "runner_sha": "f5eca179c1f1728e6da64a397d9aa27e760ac737fe8802971f4a6bf40f933602", "tasks_sha": "1f57bafbad40761e1d695c89c1716e52c1e228943d860388495aa2c7548df307", "shard": 0, "nshards": 1, "n": 2, "workers": 1, "host": "vm", "python": "3.13.16", "start": "2026-10-18T05:06:04Z"}
+  2/2 318s
+fields per line:       3 104
+Found and fixed: study3d.py now forces fork/ before upstream/ on sys.path (with PYTHONPATH=fork, upstream g1 had won and the GRID_D assertion stopped the run)

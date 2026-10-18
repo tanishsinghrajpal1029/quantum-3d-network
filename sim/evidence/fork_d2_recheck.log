@@ -1,0 +1,3 @@
+study3d from /home/claude/p3d/sim/fork/study3d.py | g1 from /home/claude/p3d/sim/fork/drift_queue_des_g1.py
+9686e9db3060 ['ion2020', 'field', 'kg', '-|p00|base'] 76s -> MATCH (all 83 columns)
+ALL MATCH

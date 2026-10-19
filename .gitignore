@@ -7,3 +7,4 @@ cache/
 *.xz
 sim/out/
 sim/evidence/3d1_runs.tgz
+sim/evidence/3d2_results.tgz

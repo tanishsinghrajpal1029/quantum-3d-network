@@ -36,4 +36,8 @@ At a matched number of nodes, does a 3D cubic lattice deliver more usable entang
   - Route diversity gives at most a small gain (1/4 comparisons pass).
   - Fidelity is unchanged.
   - Detection is slower on 3D ion2020.
-- **Next (open):** exploratory look at the detection gap; decide whether to design a reach study (long-distance demand).
+- **D6 (Study 3D-2, reach, confirmatory):** done (`docs/RESULTS_3D2.md`, LEDGER P3D-E12 to E14).
+  - 3D serves 2.3–3.5× more of uniform demand at matched nodes (F0 0.97–0.99).
+  - Safety holds with U_max up to 104.
+  - The advantage shrinks under model error with the margin.
+- **Next (open):** write up both studies as a short paper or a section; possible follow-ups are concurrent service and a lattice-size sweep.

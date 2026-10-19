@@ -167,3 +167,15 @@
 - **Checks before freezing:** the analysis was dry-run on pilot data, and the PSC runner path was tested in the cloud (`sim/evidence/psc3d2_plumbing_test.txt`).
 - **Expected cost:** about 400–500 SU; hard cap 1,024 SU.
 - **Frozen files:** `sim/psc3d2/HASHES_PREREG_3D2.txt` (14 files). All hashes verified on the Mac.
+- **Frozen:** the pre-registration was pushed at commit `7e3dc97` (`origin/main` equals `7e3dc97`) before the PSC gate. Files on PSC: HASHES OK. Gate job 49442164 submitted.
+
+## P3D-E14: Study 3D-2 confirmatory results (19 Oct 2026)
+- **Runs:** 1,224/1,224 on PSC. Gate job 49442164 passed (6/6). runs.csv sha256: d2g32 c7ec6fbf…, d3g10 801a9552…, d2g37 b569e80e…
+- **R1 safety:** PASS. 0/32 harmed networks everywhere, and 0 bad pairs, with U_max up to 104.
+- **R2:** PASS 6/6. Served share of uniform demand, 3D 10³ vs 2D 32×32: 5.0% vs 2.1% (F0 0.97), 10.2% vs 3.7% (0.98), 26.2% vs 7.6% (0.99).
+- **R3:** PASS. Ratios 2.33 / 2.78 / 3.46.
+- **R4:** PASS 3/3.
+- **S1:** PASS. 3D harm without a check is 0.73–0.77, vs 0.65–0.69 on 2D.
+- **S2:** PASS.
+- **Descriptive:** under offset 0.044 with the always-on margin the 3D advantage falls to 1.4–2.2×; edge-of-reach success in 3D is 0.52 vs 0.32 at 7 hops (F0 0.99).
+- **Write-up:** `docs/RESULTS_3D2.md`.

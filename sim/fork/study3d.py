@@ -36,7 +36,7 @@ SEEDS = (19341, 19342, 19343, 19344); DEV = (20341, 20342, 20343, 20344)    # St
 P3D_SEEDS = (19351, 19352, 19353, 19354)                 # Study 3D-1 confirmatory (docs/PREREG_3D1.md); pilots use P3D_DEV
 P3D_DEV = (30341, 30342, 30343, 30344)
 R3D_DEV = (30361, 30362, 30363, 30364)                    # Study 3D-2 (reach) pilots
-R3D_SEEDS = None                                          # Study 3D-2 confirmatory: fixed only in its pre-registration
+R3D_SEEDS = (19361, 19362, 19363, 19364)                 # Study 3D-2 (reach) confirmatory (docs/PREREG_3D2.md)
 HWS = ("ion2020", "ionproj")
 HMAX = (6 + EXTRA) if REACH else 3                                  # per-hop columns h1..h{HMAX} always written
 
@@ -128,6 +128,18 @@ CFGS_3D1 = [("kg", "-|p00|base"), ("kg", "o0.044|p00|base"), ("kgMChN", "-|p10|b
 NNET_3D1 = 32
 
 
+# Study 3D-2 (reach) confirmatory cells (docs/PREREG_3D2.md): 4 main cells x 32 networks, plus the no-check offset cell
+# (kg o0.044, harm sanity check) on 8 networks
+HWS_3D2 = ("fut97", "fut98", "fut99")
+CFGS_3D2 = [("kg", "-|p00|base"), ("kgMCa", "-|p10|base"), ("kgMCa", "o0.044|p10|base"), ("kgMChN", "o0.044F|p10|base")]
+NNET_3D2, NNET_3D2_HARM = 32, 8
+
+
+def tasks_3d2():
+    T = [[f"P3Rd{D}g{GRID}", hw, "field", arm, cfg, i] for hw in HWS_3D2 for (arm, cfg) in CFGS_3D2 for i in range(NNET_3D2)]
+    return T + [[f"P3Rd{D}g{GRID}", hw, "field", "kg", "o0.044|p00|base", i] for hw in HWS_3D2 for i in range(NNET_3D2_HARM)]
+
+
 def tasks_3d1(nnet=NNET_3D1):
     return [[f"P3Dd{D}g{GRID}", hw, "field", arm, cfg, i] for hw in HWS for (arm, cfg) in CFGS_3D1 for i in range(nnet)]
 
@@ -137,8 +149,9 @@ def tasks(prefix, nnet, mults=("base",)):
 
 
 if __name__ == "__main__":
-    if sys.argv[1:2] in (["--write-pilot"], ["--write-3d1"]):
-        ts = tasks("Q3D", int(sys.argv[3]) if len(sys.argv) > 3 else 2) if sys.argv[1] == "--write-pilot" else tasks_3d1()
+    if sys.argv[1:2] in (["--write-pilot"], ["--write-3d1"], ["--write-3d2"]):
+        if sys.argv[1] == "--write-3d2": assert REACH, "set P3D_REACH=1"; ts = tasks_3d2()
+        else: ts = tasks("Q3D", int(sys.argv[3]) if len(sys.argv) > 3 else 2) if sys.argv[1] == "--write-pilot" else tasks_3d1()
         with open(sys.argv[2], "w") as f:
             for t in ts: f.write(json.dumps(t) + "\n")
         print(f"d{D} g{GRID}: wrote {len(ts)} tasks to {sys.argv[2]}")

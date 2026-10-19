@@ -140,3 +140,30 @@
   - 3D at radius 8: U_max 104, and the guard serves 55% at hop 7 and 7% at hop 8. That is about 26% of uniform demand, against about 21% at radius 6.
 - **Cost:** 218–402 s per run in the cloud, and 1.6–2.3 GB of memory.
 - **Next:** pre-registration decisions (cost of about 250–400 SU, memory, v2 gate on PSC); see `docs/DESIGN_3D2_REACH.md`.
+
+## P3D-E12: Reach pilot, exploratory (19 Oct 2026)
+- **Runs:** 72/72 on the Mac (64 GB, 15 workers, 38 min). Pilot seeds Q3R, 2 networks per cell. Data: `sim/evidence/pilot_reach_runs.csv`.
+- **Served share of uniform demand, `kg`, no offset** (2D 32×32 / 2D 37×37 / 3D 10³):
+  - fut97: 2.1% / 1.6% / 4.6%;
+  - fut98: 3.6% / 2.7% / 10.2%;
+  - fut99: 7.6% / 5.7% / 26.0%.
+  
+  That is 3D / 2D 32×32 = 2.2× / 2.8× / 3.4×, against analytic 2.1 / 2.5 / 2.8.
+- **Safety:** 0 bad pairs in every cell, including after the forced alarm and under the always-on margin.
+- **Under offset 0.044 the 3D advantage shrinks.** With the always-on margin: fut98 0.79% vs 0.58%; fut99 3.0% vs 1.4%.
+- **Cost:** 410–450 s per run on average (at most 540 s, with 15 at once). Peak memory 1.9 GB (2D 32×32) and 2.7–2.9 GB (3D, 2D 37×37).
+- **Not evidence for any hypothesis.**
+
+## P3D-E13: Study 3D-2 pre-registration written (19 Oct 2026). Not yet run
+- **Plan:** `docs/PREREG_3D2.md`. 3 lattices × 3 link levels × (4 cells × 32 + harm cell × 8) = 1,224 runs on PSC. Seeds 19361–19364, never used before.
+- **Hypotheses:**
+  - R1 safety (primary);
+  - R2: 3D serves more of uniform demand than both 2D lattices at every link level (6 comparisons, Bonferroni);
+  - R3: ratio ≥ 1.5;
+  - R4: the advantage survives the always-on margin;
+  - S1 harm sanity check; S2 certificate falsification test;
+  - D1, D2 descriptive.
+- **Gate:** `sim/psc3d2/check_v2.sbatch` (6 runs: 4 default + 2 lazy users).
+- **Checks before freezing:** the analysis was dry-run on pilot data, and the PSC runner path was tested in the cloud (`sim/evidence/psc3d2_plumbing_test.txt`).
+- **Expected cost:** about 400–500 SU; hard cap 1,024 SU.
+- **Frozen files:** `sim/psc3d2/HASHES_PREREG_3D2.txt` (14 files). All hashes verified on the Mac.

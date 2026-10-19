@@ -1,0 +1,5 @@
+# Study 3D-2 PSC-path plumbing test (cloud, 19 Oct 2026): psc_array_runner.py + study3d (fork v2) via PYTHONPATH=fork, P3D_REACH=1, one pilot-seed task on 3D 4^3
+{"module": "study3d", "module_sha": "de3893e73dbe11a8cc2fb5346ec07778b24e36c0057e907534305c0bf1ff4790", "runner_sha": "f5eca179c1f1728e6da64a397d9aa27e760ac737fe8802971f4a6bf40f933602", "tasks_sha": "a2feb771147853325770a52079614e28ccaba0b9d51f8620d8958bd75bd60456", "shard": 0, "nshards": 1, "n": 1, "workers": 1, "host": "vm", "python": "3.13.16", "start": "2026-10-19T02:18:27Z"}
+  1/1 233s
+     block     hw arm  umax  share_servable  delivered  requests  dim
+0  Q3Rd3g4  fut97  kg    33        0.845238      13699     26370    3

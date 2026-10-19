@@ -228,3 +228,10 @@
 - **Descriptive:** under offset 0.044 the king's graph matches or beats 3D (margin + offset: 3D ÷ king 0.71 / 0.79 / 1.04). Per link, 3D serves 1.7–2.5× the king's graph.
 - **Reading:** the reach gain is partly dimension and partly shorter distances; dimension dominates as links improve. Any "3D wins" claim must carry the model-error caveat. Diagonal links were modelled as equal to straight links, which favours the king's graph.
 - Write-up: `docs/RESULTS_3D3.md`.
+
+## P3D-E18: Pre-registration timing record (19 Oct 2026)
+- **Sources:** `audit/github_activity_2026-10-19.json` (GitHub repository activity log, server-side push times), `audit/github_push_events_2026-10-19.json` (events feed; incomplete, missed the later pushes), `audit/psc_job_times_2026-10-19.txt` (PSC `sacct`; PSC clock is EDT = UTC−4, checked with `date`).
+- **S3D-1:** fc3660d pushed 18 Oct 05:13:42 UTC; gate 49402863 submitted 05:46:16; first confirmatory shard (arrays 49423730–2) 21:07:07.
+- **S3D-2:** 7e3dc97 pushed 19 Oct 02:27:40; gate 49442164 submitted 02:28:23; first shard (arrays 49442852/4/7) 02:41:55.
+- **S3D-3:** 1fe2dba pushed 04:29:40; gate 49450927 submitted 04:30:32; first shard (array 49451287) 04:42:12.
+- The repository was private at all these times.

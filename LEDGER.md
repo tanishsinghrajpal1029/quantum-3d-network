@@ -179,3 +179,17 @@
 - **S2:** PASS.
 - **Descriptive:** under offset 0.044 with the always-on margin the 3D advantage falls to 1.4–2.2×; edge-of-reach success in 3D is 0.52 vs 0.32 at 7 hops (F0 0.99).
 - **Write-up:** `docs/RESULTS_3D2.md`.
+
+## P3D-E15: Is it dimension, or just shorter distances? Exploratory geometry check (19 Oct 2026)
+- **Method:** `analytics/topology_controls.py`. Share of ordered pairs within 3 / 4 / 6 hops (the true-model reach at F0 0.97 / 0.98 / 0.99). Geometry only: no guard, no simulation.
+
+  | Lattice | Degree | Mean hop | ≤ 3 hops | ≤ 4 hops | ≤ 6 hops |
+  |---|---|---|---|---|---|
+  | 2D grid 32×32 | 4 | 21.3 | 2.2% | 3.5% | 7.1% |
+  | 2D torus 32×32 | 4 | 16.0 | 2.3% | 3.9% | 8.2% |
+  | 2D king's graph (diagonals) 32×32 | 8 | 14.9 | 4.2% | 6.8% | 13.3% |
+  | 3D cube 10³ | 6 | 9.9 | 4.7% | 8.9% | 21.7% |
+  | 3D torus 10³ | 6 | 7.5 | 6.2% | 12.8% | 35.5% |
+
+- **Reading:** part of the 3D gain is simply shorter hop distances. A degree-8 2D graph recovers 40–80% of it (80% at a 3-hop reach, 40% at 6 hops), but 3D still wins with fewer links per node (6 vs 8), and its lead grows with reach. Edge effects favour neither strongly.
+- **Implication:** a referee-proof claim needs a degree-matched 2D control in simulation (king's graph, or 2D with random shortcuts), plus a statement about physical embedding (link lengths).

@@ -15,7 +15,7 @@
 | R3 (secondary) | 3D / 2D 32×32 ratio ≥ 1.5 | **PASS.** 2.33 / 2.78 / 3.46 (analytic 2.1 / 2.5 / 2.8) |
 | R4 (secondary) | The advantage survives the always-on margin | **PASS (3/3)** |
 | S1 (prediction) | With no check, offset 0.044 harms > 10% of served users | **PASS.** 0.65–0.69 on 2D; **0.73–0.77 on 3D** |
-| S2 (falsification) | Certificate not invalidated | **PASS** (largest lower bound 0.014 < 0.05) |
+| S2 (falsification) | The certificate's nominal 5% violation rate is not rejected | **PASS** (not rejected; largest lower bound 0.014). Violations did occur, e.g. 2D 32×32 p10 4/96 (upper 0.093) |
 
 ## Served share of uniform all-pairs demand (`kg`, no offset; mean over 32 networks)
 | Link F0 | 2D 32×32 | 2D 37×37 (matched links) | **3D 10³** | 3D ÷ 2D 32×32 |
@@ -36,3 +36,6 @@
 - **Projected link hardware** (ionfut's rate, memory and gates, with F0 0.97–0.99), simplified physics and one purification round.
 - **One lattice size** of about 1,000 nodes, with requests served one at a time and the same servable request rate on every lattice.
 - **This is a simulation result about topology,** not a hardware forecast.
+
+## Correction (19 Oct 2026)
+The falsification row originally read "Certificate not invalidated". A test that does not reject the certificate's nominal 5% violation rate shows neither that no violations occurred nor that the rate is below 5%, so the row now states what the test established. The bad-pair bound in the pre-registered safety bars pools all guarded deliveries of a cell as if they were independent; deliveries of one network share its links, calibration data and history, so that bound is reported for the record only. The inferential safety statement is the network-level one (0 of 32 harmed networks in every cell, one-sided 95% bound 8.9%, networks independent); the count of bad pairs is descriptive. No verdict, number or run changed. See LEDGER P3D-E20.

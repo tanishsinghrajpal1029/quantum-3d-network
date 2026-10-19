@@ -240,3 +240,9 @@
 - Three evidence files (`sim/evidence/3d2_runs/check_v2_49442164.log`, `sim/evidence/3d3_runs/check_v3_49450927.log`, `sim/evidence/psc_env_3d2.txt`) had the PSC username and charge id replaced by `<psc-user>` and `<charge-id>`, and an unrelated second allocation was removed from the last one. No number, result or hash-listed file changed. The unredacted versions remain in the git history (decision: keep history intact, so the pre-registration commits keep their hashes).
 - **Allocation:** the PSC charge id is the PSC name of ACCESS allocation CIS261606 (same title, same resources), which the paper acknowledges.
 - **Study 3D-3 cost (from `sacct`):** shard times 39 min–2 h 0 min; about 7.1 shard-hours × 32 cores ≈ 228 SU, inside the expected 190–230. Shard 0 finished 6 s before its 2 h limit: future heavy arrays need a longer limit or more shards.
+
+## P3D-E20: Wording correction after a targeted review (19 Oct 2026); release v1.0.1
+- **What a reviewer found:** (1) "Certificate not invalidated" / "not falsified" (RESULTS_3D1–3, and P3D-E7 here) overstates the falsification tests: they did not reject the nominal 5% violation rate; violations occurred (largest lower bound: 4/96 on 2D 32×32 p10, upper bound 0.093; largest upper bound: 3/64 on 3D 5³ p20, 0.117). (2) The pre-registered bad-pair bound pools deliveries as independent, which they are not.
+- **Fix:** the falsification rows of RESULTS_3D1–3 now state what the tests established, and each file ends with a dated correction note. The bad-pair bound is labelled as reported for the record; inference rests on 0/32 harmed networks per cell (bound 8.9%). Ledger entries are append-only, so P3D-E7's "(not falsified)" stays as written and is superseded by this entry. The pre-registrations are frozen and unchanged.
+- **No verdict, number, run or analysis changed.** Manuscript v0.9 Appendix B.5 carries the same corrections.
+

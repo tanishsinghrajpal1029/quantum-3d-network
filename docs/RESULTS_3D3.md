@@ -15,7 +15,7 @@
 | K3 (secondary) | Degree helps in 2D: king's graph > plain 2D grid | **PASS (3/3).** The king's graph serves 2.0× the plain grid at every link level |
 | K4 (secondary) | The 3D lead over the king's graph survives the always-on margin (no offset) | **FAIL at F0 0.97** (diff +0.0012 [−0.0008, +0.0032]); PASS at 0.98 and 0.99 |
 | S1 (prediction) | No check, offset 0.044 harms > 10% of served users on the king's graph | **PASS** (0.64–0.68) |
-| S2 (falsification) | Certificate not invalidated on the king's graph | **PASS** (largest lower bound 0.009 < 0.05) |
+| S2 (falsification) | The certificate's nominal 5% violation rate is not rejected on the king's graph | **PASS** (not rejected; largest lower bound 0.009). Violations did occur: p10 3/96 (upper 0.079) |
 
 ## Served share of uniform all-pairs demand (`kg`, no offset; mean over 32 networks)
 | Link F0 | 2D 32×32 (1,984 links) | **2D + diagonals (3,906 links)** | **3D 10³ (2,700 links)** | 3D ÷ king | Share of the 3D gain over the grid that diagonals recover |
@@ -48,3 +48,6 @@ No intervals were pre-registered for these cells, so they are descriptive.
 - As Study 3D-2: projected link hardware (ionfut rate, memory and gates; F0 0.97–0.99), simplified physics, one purification round, about 1,000 nodes, serial service, same servable request rate on every lattice.
 - The king's-graph runs use independent networks from Study 3D-2's, on the same platform and code paths (the gate checks the code).
 - Success per servable request at 1–2 hops is reported as 1.00–1.01; the small excess is sampling noise in the expected-request denominator.
+
+## Correction (19 Oct 2026)
+The falsification row originally read "Certificate not invalidated". A test that does not reject the certificate's nominal 5% violation rate shows neither that no violations occurred nor that the rate is below 5%, so the row now states what the test established. The bad-pair bound in the pre-registered safety bars pools all guarded deliveries of a cell as if they were independent; deliveries of one network share its links, calibration data and history, so that bound is reported for the record only. The inferential safety statement is the network-level one (0 of 32 harmed networks in every cell, one-sided 95% bound 8.9%, networks independent); the count of bad pairs is descriptive. No verdict, number or run changed. See LEDGER P3D-E20.

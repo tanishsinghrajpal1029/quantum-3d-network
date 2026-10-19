@@ -14,7 +14,7 @@
 | **H3** (secondary) | Delivered fidelity unchanged within ±0.01 | **PASS.** 3D is lower by 0.002–0.003. The interval excludes 0 but lies well inside the margin |
 | S1 (prediction) | Detection carries over: alarm rate within 0.15 | **ion2020 FAIL** (3D 0.69 vs 2D 0.97); ionproj PASS (0.97 vs 1.00) |
 | S2 (prediction) | With no check, offset 0.044 harms > 10% of served users | **PASS** everywhere (0.68–0.74) |
-| S3 (falsification) | Certificate not invalidated (lower bound ≤ 0.05) | **PASS.** 3D p20: 3/64 (lower 0.013) |
+| S3 (falsification) | The certificate's nominal 5% violation rate is not rejected (FAIL only if the CP95 lower bound > 0.05) | **PASS** (not rejected). Violations did occur: 3D p20 3/64 (lower 0.013, upper 0.117) |
 
 ## What this means (plain language)
 1. **Safety holds in 3D.** The guard and the check keep their guarantees on a cube as on a grid, even though a 3-hop user in 3D can be routed over 12 links instead of 7.
@@ -34,3 +34,6 @@
 ## Exploratory follow-ups (not pre-registered; to be labelled as such)
 - Why detection is slower on 3D ion2020: compare tests per network, deliveries and the timing of the first alarm across lattices (needs the runs.csv files from PSC).
 - A reach study with long-distance demand on better hardware presets.
+
+## Correction (19 Oct 2026)
+The falsification row originally read "Certificate not invalidated". A test that does not reject the certificate's nominal 5% violation rate shows neither that no violations occurred nor that the rate is below 5%, so the row now states what the test established. The bad-pair bound in the pre-registered safety bars pools all guarded deliveries of a cell as if they were independent; deliveries of one network share its links, calibration data and history, so that bound is reported for the record only. The inferential safety statement is the network-level one (0 of 32 harmed networks in every cell, one-sided 95% bound 8.9%, networks independent); the count of bad pairs is descriptive. No verdict, number or run changed. See LEDGER P3D-E20.

@@ -1,0 +1,17 @@
+# Fork v2 gates (cloud, 19 Oct 2026)
+## d=2 compat, default (eager) path
+study3d from /home/claude/p3d/sim/fork/study3d.py | g1 from /home/claude/p3d/sim/fork/drift_queue_des_g1.py
+9686e9db3060 ['ion2020', 'field', 'kg', '-|p00|base'] 68s -> MATCH (all 83 columns)
+538775e95fe5 ['ionproj', 'field', 'kgMCa', 'o0.044F|p10|base'] 190s -> MATCH (all 83 columns)
+ALL MATCH
+## d=2 compat with lazy users (P3D_LAZY=1), old enumerator
+study3d from /home/claude/p3d/sim/fork/study3d.py | g1 from /home/claude/p3d/sim/fork/drift_queue_des_g1.py
+9686e9db3060 ['ion2020', 'field', 'kg', '-|p00|base'] 66s -> MATCH (all 83 columns)
+538775e95fe5 ['ionproj', 'field', 'kgMCa', 'o0.044F|p10|base'] 191s -> MATCH (all 83 columns)
+ALL MATCH
+## d=2 compat with lazy users after the fast enumerator
+study3d from /home/claude/p3d/sim/fork/study3d.py | g1 from /home/claude/p3d/sim/fork/drift_queue_des_g1.py
+9686e9db3060 ['ion2020', 'field', 'kg', '-|p00|base'] 68s -> MATCH (all 83 columns)
+ALL MATCH
+## Study 3D-1 path unchanged (cloud re-run of P3Dd2g11 ion2020 kgMChN o0.044 idx 0; same as before the change: 7478 delivered, 4561 bad)
+13804a0e1bd0 1 7478 4561 68.8523184399349

@@ -115,3 +115,28 @@
 
   That is about 2.8× the 2D share at matched nodes and 3.6× at matched links. U_max is 33 vs 17, but it costs the same one hop on both lattices.
 - **Next:** design note `docs/DESIGN_3D2_REACH.md`. It lists the fork v2 work (lazy users, DP routing, closed-form U_max) and open decisions. It is not pre-registered.
+
+## P3D-E10: Link-quality sweep, reach analytic, exploratory (19 Oct 2026)
+- **Method:** `analytics/reach_baseline.py` with `REACH_SWEEP=1` (output in `reach_sweep_output.txt`). ionfut's rate, memory and gates; F0 = 0.97 / 0.98 / 0.99.
+- **Reach** (true model / with guard): 3/3, 4/4 and 6/5 hops.
+- **Uniform demand served, with the guard:**
+
+  | F0 | 2D 32×32 | 3D 10³ | 2D 37×37 (matched links) | 3D advantage (nodes / links) |
+  |---|---|---|---|---|
+  | 0.97 | 2.2% | 4.7% | 1.6% | 2.1× / 2.9× |
+  | 0.98 | 3.5% | 8.9% | 2.7% | 2.5× / 3.3× |
+  | 0.99 | 5.2% | 14.6% | 4.0% | 2.8× / 3.6× |
+
+## P3D-E11: Fork v2 for reach, gates and smoke tests (19 Oct 2026)
+- **New code:** lazy users (`LazyCands`), `shortest_paths_fast`, U_max from one user per offset, per-hop outputs from multinomial counts, and the presets `fut97/98/99` with radius = reach + 2.
+- **Gates** (`sim/evidence/fork_v2_gates.txt`, `test_lazy_output.txt`):
+  - Study 34 is reproduced exactly on the default path (2/2) and with lazy users (2/2, before and after the fast enumerator).
+  - Lazy lists equal eager lists on 6 lattices.
+  - The fast enumerator equals the original on 1,600 random pairs.
+  - The Study 3D-1 path is unchanged (identical cloud row).
+- **Smoke tests** (exploratory; network 0, fut99, `kg`; `sim/evidence/reach_smoke.txt`):
+  - 2D 32×32 at radius 6: 0 bad pairs; success 0.95–1.0 at hops 1–5 and 0.86 at hop 6.
+  - 3D 10³ at radius 6: 0 bad pairs; success 0.98–1.0 at hops 1–5 and 0.96 at hop 6.
+  - 3D at radius 8: U_max 104, and the guard serves 55% at hop 7 and 7% at hop 8. That is about 26% of uniform demand, against about 21% at radius 6.
+- **Cost:** 218–402 s per run in the cloud, and 1.6–2.3 GB of memory.
+- **Next:** pre-registration decisions (cost of about 250–400 SU, memory, v2 gate on PSC); see `docs/DESIGN_3D2_REACH.md`.

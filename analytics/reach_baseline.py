@@ -20,6 +20,9 @@ import ptm_model as ptm
 RHO, T, AMP, ALPHA, TAU, E_EP = 0.3, 100.0, 0.02, 0.05, 0.9, 10
 PRESETS = {"ion2020": dict(F0=0.940, R=182.0, T2=1.0, q=0.001, e=0.005), "ionproj": dict(F0=0.970, R=200.0, T2=1.0, q=0.001, e=0.003),
            "ionfut": dict(F0=0.990, R=1000.0, T2=1.0, q=0.001, e=0.003)}
+# link-quality sweep (P3D-E10): ionfut's rate, memory and gates, with link fidelity 0.97 / 0.98 / 0.99
+SWEEP = {f"fut{int(round(F * 100))}": dict(F0=F, R=1000.0, T2=1.0, q=0.001, e=0.003) for F in (0.97, 0.98, 0.99)}
+if os.environ.get("REACH_SWEEP"): PRESETS = SWEEP
 rng = np.random.default_rng(8)
 
 

@@ -50,6 +50,53 @@ EPS = v21.EPS
 # ---- P3D fork: d-dimensional square lattice. GRID_D = 2 must reproduce the paper's 2D code exactly (same node order,
 # ---- same link ids, same sorted candidate lists); checked against Study 34 runs.csv by tools/repro_check.py.
 GRID_D = 2
+GRID_LAZY = False          # fork v2: build users' candidate paths on first request (same order and lists as the eager build)
+
+
+def shortest_paths_fast(src, dst, edges):
+    """Same result as shortest_paths (the sorted list of distinct shortest paths as link-id tuples), but generates each
+    distinct move order once (multiset permutations) instead of all h! orders: needed for paths of 7+ links."""
+    d = len(src); steps = []; cnt = []
+    for ax in range(d):
+        dv = dst[ax] - src[ax]
+        if dv: steps.append(tuple(int(np.sign(dv)) if k == ax else 0 for k in range(d))); cnt.append(abs(dv))
+    out = []; path = []
+
+    def rec(cur):
+        if not any(cnt): out.append(tuple(path)); return
+        for j, st in enumerate(steps):
+            if cnt[j]:
+                nxt = tuple(c + m for c, m in zip(cur, st)); cnt[j] -= 1; path.append(edges[frozenset((cur, nxt))])
+                rec(nxt); path.pop(); cnt[j] += 1
+    rec(tuple(src))
+    return sorted(out)
+
+
+class LazyCands:
+    """Drop-in for the eager list of users' candidate-path lists. User i is the i-th ordered node pair (a, b) with
+    1 <= hop(a, b) <= Lmax in the eager loop order (for a in nodes: for b in nodes), so indexing gives exactly the eager
+    list's entries; candidate lists are computed on first use and cached. Iteration yields ONE user per distinct offset
+    vector b - a: enough for the only iterating use upstream (U_max = max over users of the union of candidate links),
+    because that union depends only on the offset."""
+    def __init__(s, nodes, edges, Lmax):
+        s.nodes, s.edges = nodes, edges; X = np.array(nodes, int); s._cache = {}
+        A, Bn = [], []
+        for ia in range(len(nodes)):
+            dist = np.abs(X - X[ia]).sum(1); ib = np.nonzero((dist >= 1) & (dist <= Lmax))[0]
+            A.append(np.full(len(ib), ia, np.int32)); Bn.append(ib.astype(np.int32))
+        s.a = np.concatenate(A); s.b = np.concatenate(Bn)
+        off = X[s.b] - X[s.a]; _, s._rep = np.unique(off, axis=0, return_index=True)
+
+    def __len__(s):
+        return len(s.a)
+
+    def __getitem__(s, i):
+        i = int(i); c = s._cache.get(i)
+        if c is None: c = s._cache[i] = shortest_paths_fast(s.nodes[s.a[i]], s.nodes[s.b[i]], s.edges)
+        return c
+
+    def __iter__(s):
+        return (s[int(i)] for i in sorted(s._rep))
 
 
 def grid_topology(n, d=None):
@@ -87,6 +134,7 @@ class Net:
         s.r = (1 - 2 * s.P["q"]) ** 2; P = s.P
         if topo == "grid":
             nodes, edges = grid_topology(GRID_N); s.nl = len(edges); pairs = []
+            if GRID_LAZY: pairs = LazyCands(nodes, edges, s.Lmax); nodes = ()      # fork v2 (skips the eager loop)
             for a in nodes:
                 for b in nodes:
                     d = hop_distance(a, b)

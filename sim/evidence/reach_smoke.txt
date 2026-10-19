@@ -1,0 +1,26 @@
+# Fork v2 reach smoke tests (cloud; exploratory; pilot seeds Q3R, network 0, arm kg, no offset)
+d2 g32 fut99 kg -|p00|base idx 0: import 4s, run 218s, rss 1554 MB | users 74648 (servable share 0.071), U_max 24, requests 26031, delivered 24986, bad 0
+   hop 1: users 3968, paths/pair 1.00, success/request 0.948
+   hop 2: users 7684, paths/pair 1.50, success/request 0.984
+   hop 3: users 11152, paths/pair 2.33, success/request 0.973
+   hop 4: users 14376, paths/pair 3.75, success/request 1.024
+   hop 5: users 17360, paths/pair 6.21, success/request 1.001
+   hop 6: users 20108, paths/pair 10.52, success/request 0.864
+-- radius = analytic reach (6):
+d3 g10 fut99 kg -|p00|base idx 0: import 5s, run 255s, rss 2066 MB | users 216568 (servable share 0.217), U_max 54, requests 25725, delivered 25309, bad 0
+   hop 1: users 5400, paths/pair 1.00, success/request 0.981
+   hop 2: users 14520, paths/pair 1.67, success/request 0.995
+   hop 3: users 27312, paths/pair 3.33, success/request 0.985
+   hop 4: users 41952, paths/pair 7.07, success/request 0.997
+   hop 5: users 56832, paths/pair 15.64, success/request 1.001
+   hop 6: users 70552, paths/pair 35.83, success/request 0.960
+-- radius = reach + 2 (8):
+d3 g10 fut99 kg -|p00|base idx 0: import 5s, run 402s, rss 2255 MB | users 388384 (servable share 0.389), U_max 104, requests 25847, delivered 17552, bad 0
+   hop 1: users 5400, paths/pair 1.00, success/request 0.971
+   hop 2: users 14520, paths/pair 1.67, success/request 1.001
+   hop 3: users 27312, paths/pair 3.33, success/request 0.940
+   hop 4: users 41952, paths/pair 7.07, success/request 1.007
+   hop 5: users 56832, paths/pair 15.64, success/request 1.008
+   hop 6: users 70552, paths/pair 35.83, success/request 0.952
+   hop 7: users 81912, paths/pair 84.75, success/request 0.549
+   hop 8: users 89904, paths/pair 206.88, success/request 0.074

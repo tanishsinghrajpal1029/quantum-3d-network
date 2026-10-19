@@ -30,3 +30,12 @@ Requirements: numpy, scipy, pandas and scikit-learn (imported by an upstream mod
 ## Known limits of the fork
 - Study 34's matched-exposure variant `u` is not ported.
 - Feature scalings in the AI prior (`len(NB1)/6`, `len(NB2)/12`) were set for 2D degrees. The `kg`/`kgMChN`/`kgMCa` arms do not use the AI prior.
+
+## Fork v2 (reach; 19 Oct 2026)
+- `P3D_REACH=1` adds the presets `fut97`, `fut98` and `fut99` (ionfut's rate, memory and gates; link F0 0.97/0.98/0.99). The service radius is the analytic reach plus `P3D_RADIUS_EXTRA` (default 2).
+- It also switches on lazy users (`LazyCands`) and fast path enumeration (`shortest_paths_fast`).
+- `P3D_LAZY=1` switches on lazy users alone, for the equivalence gate.
+- Reach blocks: `Q3R…` (pilot seeds 30361–30364) and `P3R…` (confirmatory seeds, set only in the pre-registration). Network seeds use the `p3r` tag, so they never overlap Study 3D-1.
+- Without these variables, every earlier path is unchanged (`evidence/fork_v2_gates.txt`).
+- Tests: `python3 tests/test_lazy.py`. Smoke test: `P3D_REACH=1 P3D_D=3 P3D_GRID=10 python3 tools/reach_smoke.py fut99 kg "-|p00|base" 0 out.csv`.
+- Note: Study 3D-1 was frozen at commit `fc3660d`. To reproduce it, use the `study3d.py` and `drift_queue_des_g1.py` from that commit. The v2 files give identical 3D-1 rows, but their hashes differ.

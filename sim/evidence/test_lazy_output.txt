@@ -1,0 +1,14 @@
+d=2 n=5 Lmax=2: 204 users identical; U_max 4 (lazy iterates 12 offsets)
+d=2 n=5 Lmax=3: 340 users identical; U_max 7 (lazy iterates 24 offsets)
+d=2 n=11 Lmax=3: 2308 users identical; U_max 7 (lazy iterates 24 offsets)
+d=3 n=4 Lmax=3: 1800 users identical; U_max 12 (lazy iterates 62 offsets)
+d=3 n=5 Lmax=4: 7064 users identical; U_max 20 (lazy iterates 128 offsets)
+d=3 n=6 Lmax=6: 28632 users identical; U_max 54 (lazy iterates 370 offsets)
+3D 10^3, Lmax 6: 216568 users, U_max 54, built + U_max in 0.3s
+ALL LAZY TESTS PASS
+fast enumerator == original on 400 random pairs: d=2 n=5 Lmax=4
+fast enumerator == original on 400 random pairs: d=2 n=11 Lmax=6
+fast enumerator == original on 400 random pairs: d=3 n=6 Lmax=6
+fast enumerator == original on 400 random pairs: d=3 n=5 Lmax=4
+3D offset (3,3,2): 560 paths in 0.002s (8!/(3!3!2!) = 560)
+FAST ENUMERATOR TESTS PASS

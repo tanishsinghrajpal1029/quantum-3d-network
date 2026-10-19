@@ -193,3 +193,25 @@
 
 - **Reading:** part of the 3D gain is simply shorter hop distances. A degree-8 2D graph recovers 40–80% of it (80% at a 3-hop reach, 40% at 6 hops), but 3D still wins with fewer links per node (6 vs 8), and its lead grows with reach. Edge effects favour neither strongly.
 - **Implication:** a referee-proof claim needs a degree-matched 2D control in simulation (king's graph, or 2D with random shortcuts), plus a statement about physical embedding (link lengths).
+
+## P3D-E16: Fork v3 (king's graph) and Study 3D-3 pre-registration (19 Oct 2026). Not yet run
+- **Why:** to check that Study 3D-2's reach gain comes from dimension and not just from more links per node. The control is a 2D 32×32 grid plus both diagonals (3,906 links, up to 8 per node), against the 3D cube (2,700 links, up to 6 per node).
+- **Code (v3):**
+  - `GRID_KING` with diagonal links and Chebyshev hops;
+  - `shortest_paths_king`;
+  - U_max from centred placements (king's-graph paths can bulge past the bounding box);
+  - per-hop path counts by DP.
+- **Tests and gates (cloud):**
+  - every king shortest-path list (h ≤ 4) on 4×4, 6×6 and 9×9 matches brute-force BFS, and U_max matches brute force;
+  - the per-hop counter matches enumeration for every user (`sim/evidence/test_king_output.txt`);
+  - v3 = v2 on a reach task (136 columns);
+  - Study 34 is reproduced exactly on the default path and with lazy users (`sim/evidence/fork_v3_gates.txt`).
+- **Smoke run** (king's graph, fut99, `kg`, network 0): served share 15.7%, U_max 96, 3.2 GB of memory, 408 s.
+- **Pre-registration:** `docs/PREREG_3D3.md`. 408 runs, seeds 19371–19374. It compares against Study 3D-2's frozen runs.csv copies (`sim/reference/s3d2_*`, sha256 verified by the analysis).
+  - K1 (primary): 3D > king's graph at every link level. It may fail at F0 0.97, where geometry predicts a ratio of only about 1.1.
+  - K2 (primary): safety on the king's graph.
+  - K3, K4 (secondary); S1, S2; descriptive outputs.
+- **Gate:** `check_v3.sbatch` (2 Study 34 runs on the default path, 1 with lazy users, and 1 Study 3D-2 confirmatory row).
+- **Expected cost:** about 190–230 SU; hard cap 512.
+- **Frozen files:** `sim/psc3d3/HASHES_PREREG_3D3.txt` (16 files). All match on the Mac.
+- **Note:** to reproduce Study 3D-2 exactly, use the fork files from commit `7e3dc97`. The v3 files are checked to give identical rows for it, but their hashes differ.

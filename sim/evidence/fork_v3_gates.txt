@@ -1,0 +1,21 @@
+# Fork v3 (king's graph) gates and smoke test, cloud, 19 Oct 2026
+## Study 34 default path
+study3d from /home/claude/p3d/sim/fork/study3d.py | g1 from /home/claude/p3d/sim/fork/drift_queue_des_g1.py
+9686e9db3060 ['ion2020', 'field', 'kg', '-|p00|base'] 63s -> MATCH (all 83 columns)
+ALL MATCH
+## Study 34 with lazy users
+study3d from /home/claude/p3d/sim/fork/study3d.py | g1 from /home/claude/p3d/sim/fork/drift_queue_des_g1.py
+9686e9db3060 ['ion2020', 'field', 'kg', '-|p00|base'] 67s -> MATCH (all 83 columns)
+ALL MATCH
+## v3 vs v2 on the same reach task (Q3Rd3g4 fut97 kg idx 0): all 136 columns match (checked by script; v2 row c60f649f…)
+## King's graph smoke test (pilot seed, fut99, kg, network 0)
+king 32x32 fut99 kg idx0: import 8s run 408s rss 3208 MB | links 3906 users 221760 share 0.212 U_max 96 requests 26004 qual 19275 bad 0
+  hop 1: users 7812 paths/pair 1.0 success 1.072
+  hop 2: users 14880 paths/pair 2.0 success 0.974
+  hop 3: users 21228 paths/pair 4.3 success 1.029
+  hop 4: users 26880 paths/pair 10.1 success 0.982
+  hop 5: users 31860 paths/pair 24.5 success 1.001
+  hop 6: users 36192 paths/pair 62.0 success 0.948
+  hop 7: users 39900 paths/pair 161.1 success 0.601
+  hop 8: users 43008 paths/pair 427.2 success 0.072
+served share of uniform demand: 0.1569

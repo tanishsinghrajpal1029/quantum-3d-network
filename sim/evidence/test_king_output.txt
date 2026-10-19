@@ -1,0 +1,7 @@
+king 4x4: 42 links; hop distance and every shortest-path list (h <= 4) match BFS; U_max 13 matches brute force
+king 6x6: 110 links; hop distance and every shortest-path list (h <= 4) match BFS; U_max 24 matches brute force
+king 9x9: 272 links; hop distance and every shortest-path list (h <= 4) match BFS; U_max 24 matches brute force
+ALL KING TESTS PASS
+king 9x9, Lmax 4: per-hop counter matches enumeration for all 3640 users
+king 12x12, Lmax 6: per-hop counter matches enumeration for all 12852 users
+ALL KING COUNTER TESTS PASS

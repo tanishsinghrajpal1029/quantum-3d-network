@@ -17,6 +17,9 @@ assert hasattr(g1, "GRID_D"), f"wrong drift_queue_des_g1 on path: {g1.__file__}"
 D = int(os.environ.get("P3D_D", "2")); GRID = int(os.environ.get("P3D_GRID", "5"))
 # fork v2 (reach): P3D_REACH=1 adds the link-quality sweep presets and lazy users; P3D_LAZY=1 alone tests lazy users
 REACH = os.environ.get("P3D_REACH") == "1"
+KING = os.environ.get("P3D_KING") == "1"                  # fork v3: 2D king's graph (Study 3D-3); reach mode, d = 2 only
+assert not KING or (REACH and D == 2), "P3D_KING=1 needs P3D_REACH=1 and P3D_D=2"
+g1.GRID_KING = KING
 g1.GRID_LAZY = REACH or os.environ.get("P3D_LAZY") == "1"
 if REACH:
     # ionfut's rate, memory and gates (drift_queue_des_v15.IONFUT) with link fidelity 0.97 / 0.98 / 0.99. Service radius
@@ -29,13 +32,15 @@ if REACH:
 g1.GRID_N, g1.GRID_D = GRID, D                            # must precede every import that builds the lattice (corr_net)
 import study32 as s32
 import corr_net as cn1
-assert cn1.NL == D * GRID ** (D - 1) * (GRID - 1), (cn1.NL, D, GRID)
+assert cn1.NL == (2 * GRID * (GRID - 1) + 2 * (GRID - 1) ** 2 if KING else D * GRID ** (D - 1) * (GRID - 1)), (cn1.NL, D, GRID)
 assert len(cn1.NODES) == GRID ** D
 
 SEEDS = (19341, 19342, 19343, 19344); DEV = (20341, 20342, 20343, 20344)    # Study 34 (compat); P3D blocks set their own below
 P3D_SEEDS = (19351, 19352, 19353, 19354)                 # Study 3D-1 confirmatory (docs/PREREG_3D1.md); pilots use P3D_DEV
 P3D_DEV = (30341, 30342, 30343, 30344)
 R3D_DEV = (30361, 30362, 30363, 30364)                    # Study 3D-2 (reach) pilots
+K3D_DEV = (30371, 30372, 30373, 30374)                    # Study 3D-3 (king's graph control) pilots
+K3D_SEEDS = (19371, 19372, 19373, 19374)                 # Study 3D-3 (king's graph control) confirmatory (docs/PREREG_3D3.md)
 R3D_SEEDS = (19361, 19362, 19363, 19364)                 # Study 3D-2 (reach) confirmatory (docs/PREREG_3D2.md)
 HWS = ("ion2020", "ionproj")
 HMAX = (6 + EXTRA) if REACH else 3                                  # per-hop columns h1..h{HMAX} always written
@@ -68,9 +73,11 @@ class Net3D(s32.Net32):
         if not s.compat34 and isinstance(s.cands, g1.LazyCands):   # fork v2: per-hop breakdown without building every list
             import numpy as np
             from math import factorial
-            C = s.cands; X = np.array(C.nodes, int); off = np.abs(X[C.b] - X[C.a]); hop = off.sum(1)
-            fac = np.array([factorial(k) for k in range(off.max() * D + 1)], float)
-            npaths = fac[hop] / np.prod(fac[off], axis=1)                 # shortest paths = multinomial(hop; offsets)
+            C = s.cands; X = np.array(C.nodes, int); off = np.abs(X[C.b] - X[C.a])
+            if KING: hop, npaths = _king_hops_paths(X, C.a, C.b)
+            else:
+                hop = off.sum(1); fac = np.array([factorial(k) for k in range(off.max() * D + 1)], float)
+                npaths = fac[hop] / np.prod(fac[off], axis=1)             # shortest paths = multinomial(hop; offsets)
             by_h = {}
             for ci, x in s.ustat.items(): by_h.setdefault(int(hop[ci]), []).append(x)
             for h in range(1, HMAX + 1):
@@ -92,6 +99,25 @@ class Net3D(s32.Net32):
         return out
 
 
+def _king_hops_paths(X, a, b):
+    """King's graph: hop = Chebyshev distance; number of shortest paths = number of walks of h steps with minor-axis moves
+    in {-1, 0, +1} from the source's to the target's minor coordinate, staying inside [0, n-1] (DP, cached by h, y0, y1)."""
+    import numpy as np
+    n = int(X.max()) + 1; dX = np.abs(X[b] - X[a]); hop = dX.max(1)
+    minor = np.where(dX[:, 0] >= dX[:, 1], 1, 0)                   # minor axis: the one with the smaller offset
+    y0 = X[a][np.arange(len(a)), minor]; y1 = X[b][np.arange(len(b)), minor]
+    cache = {}
+    def count(h, u, v):
+        k = (h, u, v)
+        if k not in cache:
+            w = np.zeros(n); w[u] = 1.0
+            for _ in range(h): w = w + np.r_[0, w[:-1]] + np.r_[w[1:], 0]
+            cache[k] = w[v]
+        return cache[k]
+    npaths = np.array([count(int(h), int(u), int(v)) for h, u, v in zip(hop, y0, y1)])
+    return hop, npaths
+
+
 def compat(t):
     return t[0] == f"S34g{GRID}" and D == 2
 
@@ -108,10 +134,11 @@ def run_one(t):
         nseed = int(hashlib.sha256(f"s34net|g{GRID}|{hw}|{idx}".encode()).hexdigest()[:8], 16)
         rseed = int(hashlib.sha256(f"s34run|g{GRID}|{hw}|{idx}".encode()).hexdigest()[:8], 16)
     else:
-        assert blk[3:] == f"d{D}g{GRID}" and blk[:3] in (("Q3R", "P3R") if REACH else ("Q3D", "P3D")), f"block {blk} vs d{D}g{GRID}, reach={REACH}"
-        seeds = {"Q3D": P3D_DEV, "P3D": P3D_SEEDS, "Q3R": R3D_DEV, "P3R": R3D_SEEDS}[blk[:3]]
+        ok_pre = ("Q3K", "P3K") if KING else (("Q3R", "P3R") if REACH else ("Q3D", "P3D"))
+        assert blk[3:] == f"d{D}g{GRID}" and blk[:3] in ok_pre, f"block {blk} vs d{D}g{GRID}, reach={REACH}, king={KING}"
+        seeds = {"Q3D": P3D_DEV, "P3D": P3D_SEEDS, "Q3R": R3D_DEV, "P3R": R3D_SEEDS, "Q3K": K3D_DEV, "P3K": K3D_SEEDS}[blk[:3]]
         assert seeds is not None, "confirmatory P3D seeds are set only in the pre-registration"
-        tag = "p3r" if REACH else "p3d"                       # Study 3D-2 (reach) seeds never overlap Study 3D-1's
+        tag = "p3k" if KING else ("p3r" if REACH else "p3d")                       # Study 3D-2 (reach) seeds never overlap Study 3D-1's
         nseed = int(hashlib.sha256(f"{tag}net|d{D}|g{GRID}|{hw}|{idx}".encode()).hexdigest()[:8], 16)
         rseed = int(hashlib.sha256(f"{tag}run|d{D}|g{GRID}|{hw}|{idx}".encode()).hexdigest()[:8], 16)
     Net3D.compat34 = compat(t)
@@ -136,8 +163,9 @@ NNET_3D2, NNET_3D2_HARM = 32, 8
 
 
 def tasks_3d2():
-    T = [[f"P3Rd{D}g{GRID}", hw, "field", arm, cfg, i] for hw in HWS_3D2 for (arm, cfg) in CFGS_3D2 for i in range(NNET_3D2)]
-    return T + [[f"P3Rd{D}g{GRID}", hw, "field", "kg", "o0.044|p00|base", i] for hw in HWS_3D2 for i in range(NNET_3D2_HARM)]
+    pre = "P3K" if KING else "P3R"                             # Study 3D-3 (king's graph) reuses Study 3D-2's cells and sizes
+    T = [[f"{pre}d{D}g{GRID}", hw, "field", arm, cfg, i] for hw in HWS_3D2 for (arm, cfg) in CFGS_3D2 for i in range(NNET_3D2)]
+    return T + [[f"{pre}d{D}g{GRID}", hw, "field", "kg", "o0.044|p00|base", i] for hw in HWS_3D2 for i in range(NNET_3D2_HARM)]
 
 
 def tasks_3d1(nnet=NNET_3D1):

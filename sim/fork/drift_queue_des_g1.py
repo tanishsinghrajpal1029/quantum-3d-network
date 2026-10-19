@@ -50,6 +50,7 @@ EPS = v21.EPS
 # ---- P3D fork: d-dimensional square lattice. GRID_D = 2 must reproduce the paper's 2D code exactly (same node order,
 # ---- same link ids, same sorted candidate lists); checked against Study 34 runs.csv by tools/repro_check.py.
 GRID_D = 2
+GRID_KING = False          # fork v3: 2D "king's graph" (grid plus both diagonals; hop distance = Chebyshev). Needs GRID_LAZY
 GRID_LAZY = False          # fork v2: build users' candidate paths on first request (same order and lists as the eager build)
 
 
@@ -82,7 +83,8 @@ class LazyCands:
         s.nodes, s.edges = nodes, edges; X = np.array(nodes, int); s._cache = {}
         A, Bn = [], []
         for ia in range(len(nodes)):
-            dist = np.abs(X - X[ia]).sum(1); ib = np.nonzero((dist >= 1) & (dist <= Lmax))[0]
+            dist = np.abs(X - X[ia]).max(1) if GRID_KING else np.abs(X - X[ia]).sum(1)
+            ib = np.nonzero((dist >= 1) & (dist <= Lmax))[0]
             A.append(np.full(len(ib), ia, np.int32)); Bn.append(ib.astype(np.int32))
         s.a = np.concatenate(A); s.b = np.concatenate(Bn)
         off = X[s.b] - X[s.a]; _, s._rep = np.unique(off, axis=0, return_index=True)
@@ -92,25 +94,66 @@ class LazyCands:
 
     def __getitem__(s, i):
         i = int(i); c = s._cache.get(i)
-        if c is None: c = s._cache[i] = shortest_paths_fast(s.nodes[s.a[i]], s.nodes[s.b[i]], s.edges)
+        if c is None:
+            f = shortest_paths_king if GRID_KING else shortest_paths_fast
+            c = s._cache[i] = f(s.nodes[s.a[i]], s.nodes[s.b[i]], s.edges)
         return c
 
     def __iter__(s):
+        if GRID_KING: return s._iter_king()
         return (s[int(i)] for i in sorted(s._rep))
 
+    def _iter_king(s):
+        """King's graph: shortest paths can bulge outside the pair's bounding box, so near the boundary they are cut off and
+        the link union depends on position. U_max is a max over users, so yield each offset placed as centrally as possible
+        (the most room, hence the largest union)."""
+        n = int(max(max(v) for v in s.nodes)) + 1; X = np.array(s.nodes, int)
+        for i in sorted(s._rep):
+            off = X[s.b[i]] - X[s.a[i]]
+            src = tuple(int(max(0, -o_) + (n - abs(int(o_)) - 1) // 2) for o_ in off)    # centre the pair in the grid
+            dst = tuple(int(a + o_) for a, o_ in zip(src, off))
+            yield shortest_paths_king(src, dst, s.edges)
 
-def grid_topology(n, d=None):
-    d = GRID_D if d is None else d
+
+def grid_topology(n, d=None, king=None):
+    d = GRID_D if d is None else d; king = GRID_KING if king is None else king
     nodes = list(itertools.product(range(n), repeat=d)); edges = {}         # d = 2: (0,0), (0,1), ... as the 2D original
     for v in nodes:
         for ax in range(d):                                                  # axis order 0, 1, ... = original (i+1, j), (i, j+1)
             w = v[:ax] + (v[ax] + 1,) + v[ax + 1:]
             if w[ax] < n: edges[frozenset((v, w))] = len(edges)
+        if king:                                                             # fork v3: diagonals (i+1, j+1) and (i+1, j-1)
+            assert d == 2
+            for w in ((v[0] + 1, v[1] + 1), (v[0] + 1, v[1] - 1)):
+                if w[0] < n and 0 <= w[1] < n: edges[frozenset((v, w))] = len(edges)
     return nodes, edges
 
 
 def hop_distance(a, b):
+    if GRID_KING: return max(abs(x - y) for x, y in zip(a, b))
     return sum(abs(x - y) for x, y in zip(a, b))
+
+
+def shortest_paths_king(src, dst, edges):
+    """Fork v3: all shortest paths in the king's graph, sorted. With |dx| >= |dy| (else axes swapped), a shortest path has
+    h = |dx| steps, each moving one unit along x and -1, 0 or +1 along y, ending at dst; it may leave the y-range only within
+    the grid (enforced by the edge lookup)."""
+    (x0, y0), (x1, y1) = src, dst; swap = abs(y1 - y0) > abs(x1 - x0)
+    if swap: (x0, y0), (x1, y1) = (y0, x0), (y1, x1)
+    h = abs(x1 - x0); sx = 1 if x1 > x0 else -1; out = []; path = []
+    def node(x, y): return (y, x) if swap else (x, y)
+    def rec(x, y, k):
+        if k == h:
+            if y == y1: out.append(tuple(path))
+            return
+        for dy in (-1, 0, 1):
+            ny = y + dy
+            if abs(y1 - ny) > h - k - 1: continue
+            e = edges.get(frozenset((node(x, y), node(x + sx, ny))))
+            if e is None: continue
+            path.append(e); rec(x + sx, ny, k + 1); path.pop()
+    rec(x0, y0, 0)
+    return sorted(out)
 
 
 def shortest_paths(src, dst, edges):

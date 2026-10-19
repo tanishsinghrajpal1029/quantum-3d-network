@@ -215,3 +215,16 @@
 - **Expected cost:** about 190–230 SU; hard cap 512.
 - **Frozen files:** `sim/psc3d3/HASHES_PREREG_3D3.txt` (16 files). All match on the Mac.
 - **Note:** to reproduce Study 3D-2 exactly, use the fork files from commit `7e3dc97`. The v3 files are checked to give identical rows for it, but their hashes differ.
+- **Frozen:** the pre-registration was pushed at commit `1fe2dba` before the gate. Files on PSC: HASHES OK. Gate job 49450927. A first launch attempt, made before the gate finished, was refused by the GATE PASS check, so nothing ran.
+- **Gate passed** (job 49450927: 4/4 reproduced exactly, including a Study 3D-2 reach row). Confirmatory array job 49451287 submitted (8 shards × 16 workers on 32 cores).
+
+## P3D-E17: Study 3D-3 confirmatory results, the king's-graph control (19 Oct 2026)
+- **Runs:** 408/408 on PSC (array job 49451287); runs.csv sha256 5b38e19d853ad3c7…; analysis `sim/evidence/analysis_3d3.txt`. No deviations.
+- **K1 PASS (3/3):** 3D 10³ beats 2D 32×32 + diagonals in `kg -`: 5.0% vs 4.3% / 10.2% vs 7.4% / 26.2% vs 15.3%; ratios 1.16 / 1.38 / 1.71 (geometry-only 1.12 / 1.31 / 1.63).
+- **K2 PASS:** 0/32 harmed networks in every cell; 0 bad pairs.
+- **K3 PASS:** diagonals double the plain grid (2.0×), recovering 75% / 57% / 42% of the 3D gain.
+- **K4 FAIL at F0 0.97** (margin, no offset: +0.0012 [−0.0008, +0.0032]); PASS at 0.98 and 0.99.
+- **S1 PASS** (0.64–0.68). **S2 PASS.**
+- **Descriptive:** under offset 0.044 the king's graph matches or beats 3D (margin + offset: 3D ÷ king 0.71 / 0.79 / 1.04). Per link, 3D serves 1.7–2.5× the king's graph.
+- **Reading:** the reach gain is partly dimension and partly shorter distances; dimension dominates as links improve. Any "3D wins" claim must carry the model-error caveat. Diagonal links were modelled as equal to straight links, which favours the king's graph.
+- Write-up: `docs/RESULTS_3D3.md`.

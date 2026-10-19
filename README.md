@@ -40,4 +40,8 @@ At a matched number of nodes, does a 3D cubic lattice deliver more usable entang
   - 3D serves 2.3–3.5× more of uniform demand at matched nodes (F0 0.97–0.99).
   - Safety holds with U_max up to 104.
   - The advantage shrinks under model error with the margin.
-- **Next (open):** write up both studies as a short paper or a section; possible follow-ups are concurrent service and a lattice-size sweep.
+- **D7 (Study 3D-3, king's-graph control, confirmatory):** done (`docs/RESULTS_3D3.md`, LEDGER P3D-E16/E17).
+  - 3D beats a 2D grid with diagonals (more links, higher degree) at every link level: 1.16× / 1.38× / 1.71×.
+  - Diagonals alone recover 42–75% of the 3D gain over a plain grid.
+  - Under model error with the margin, the diagonal grid matches or beats 3D.
+- **Next (open):** write up all three studies as a short paper or a section; possible follow-ups are concurrent service and a lattice-size sweep.

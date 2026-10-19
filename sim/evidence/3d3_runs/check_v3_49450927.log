@@ -1,13 +1,13 @@
-study3d from /ocean/projects/cis260277p/trajpal1/p3d3/sim/fork/study3d.py | g1 from /ocean/projects/cis260277p/trajpal1/p3d3/sim/fork/drift_queue_des_g1.py
+study3d from /ocean/projects/<charge-id>/<psc-user>/p3d3/sim/fork/study3d.py | g1 from /ocean/projects/<charge-id>/<psc-user>/p3d3/sim/fork/drift_queue_des_g1.py
 683f07a56b42 ['ion2020', 'field', 'kgMChN', 'o0.044|p10|base'] 200s -> MATCH (all 83 columns)
 ALL MATCH
-study3d from /ocean/projects/cis260277p/trajpal1/p3d3/sim/fork/study3d.py | g1 from /ocean/projects/cis260277p/trajpal1/p3d3/sim/fork/drift_queue_des_g1.py
+study3d from /ocean/projects/<charge-id>/<psc-user>/p3d3/sim/fork/study3d.py | g1 from /ocean/projects/<charge-id>/<psc-user>/p3d3/sim/fork/drift_queue_des_g1.py
 9686e9db3060 ['ion2020', 'field', 'kg', '-|p00|base'] 90s -> MATCH (all 83 columns)
 ALL MATCH
-study3d from /ocean/projects/cis260277p/trajpal1/p3d3/sim/fork/study3d.py | g1 from /ocean/projects/cis260277p/trajpal1/p3d3/sim/fork/drift_queue_des_g1.py
+study3d from /ocean/projects/<charge-id>/<psc-user>/p3d3/sim/fork/study3d.py | g1 from /ocean/projects/<charge-id>/<psc-user>/p3d3/sim/fork/drift_queue_des_g1.py
 75e2bcf89c71 ['fut97', 'field', 'kg', '-|p00|base'] 444s -> MATCH (all 135 columns)
 ALL MATCH
-study3d from /ocean/projects/cis260277p/trajpal1/p3d3/sim/fork/study3d.py | g1 from /ocean/projects/cis260277p/trajpal1/p3d3/sim/fork/drift_queue_des_g1.py
+study3d from /ocean/projects/<charge-id>/<psc-user>/p3d3/sim/fork/study3d.py | g1 from /ocean/projects/<charge-id>/<psc-user>/p3d3/sim/fork/drift_queue_des_g1.py
 9686e9db3060 ['ion2020', 'field', 'kg', '-|p00|base'] 90s -> MATCH (all 83 columns)
 ALL MATCH
 GATE: 4 of 4 runs reproduced exactly (2 default + 1 lazy users + 1 Study 3D-2 reach run)

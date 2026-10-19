@@ -235,3 +235,8 @@
 - **S3D-2:** 7e3dc97 pushed 19 Oct 02:27:40; gate 49442164 submitted 02:28:23; first shard (arrays 49442852/4/7) 02:41:55.
 - **S3D-3:** 1fe2dba pushed 04:29:40; gate 49450927 submitted 04:30:32; first shard (array 49451287) 04:42:12.
 - The repository was private at all these times.
+
+## P3D-E19: Redaction before making the repository public (19 Oct 2026)
+- Three evidence files (`sim/evidence/3d2_runs/check_v2_49442164.log`, `sim/evidence/3d3_runs/check_v3_49450927.log`, `sim/evidence/psc_env_3d2.txt`) had the PSC username and charge id replaced by `<psc-user>` and `<charge-id>`, and an unrelated second allocation was removed from the last one. No number, result or hash-listed file changed. The unredacted versions remain in the git history (decision: keep history intact, so the pre-registration commits keep their hashes).
+- **Allocation:** the PSC charge id is the PSC name of ACCESS allocation CIS261606 (same title, same resources), which the paper acknowledges.
+- **Study 3D-3 cost (from `sacct`):** shard times 39 min–2 h 0 min; about 7.1 shard-hours × 32 cores ≈ 228 SU, inside the expected 190–230. Shard 0 finished 6 s before its 2 h limit: future heavy arrays need a longer limit or more shards.

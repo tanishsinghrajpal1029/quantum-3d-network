@@ -1,0 +1,9 @@
+{
+  "title": "Beyond the square grid: provable entanglement delivery on 2D and 3D lattices. Simulator fork, pre-registrations, results and ledger",
+  "upload_type": "software",
+  "description": "Three pre-registered simulation studies (S3D-1 to S3D-3) of the safe entanglement-delivery closed loop on 2D grids, 3D cubic lattices and a 2D grid with diagonal links: safety of the provable and always-on margins, detection, and served share of demand. Includes the simulator fork (upstream modules verbatim), PSC gate jobs, pre-registrations, run outputs, analyses, the evidence ledger and audit records. Companion to 'What can a quantum network promise about the entangled pairs it delivers?' (code: https://github.com/tanishsinghrajpal1029/safe-entanglement-delivery).",
+  "creators": [{"name": "Rajpal, Tanish Singh", "affiliation": "Carnegie Mellon University"}],
+  "license": "MIT",
+  "keywords": ["quantum networks", "entanglement routing", "3D lattice", "pre-registration", "simulation"],
+  "related_identifiers": [{"identifier": "https://github.com/tanishsinghrajpal1029/safe-entanglement-delivery", "relation": "isSupplementTo", "scheme": "url"}]
+}
